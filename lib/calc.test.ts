@@ -86,6 +86,7 @@ const mini: Dataset = {
     serviceYears: [2024],
     population: { 2024: 18_000_000 },
     gdp: { 2024: 1_000_000 },
+    breaks: [],
     notes: [],
   },
   netherlands: { id: "528", coords: [5, 52] },
@@ -201,7 +202,8 @@ describe("echte data", () => {
   ])("NL → %s in 2024 is precies CBS-goederen + CBS-diensten (standaardweergave, zonder schattingen)", (name, id) => {
     const g = cbsRow(cbsGoods, name, (r) => r.Perioden === "2024JJ00" && r.SITC === "T001082");
     const s = cbsRow(cbsServices, name, (r) => r.Perioden === "2024JJ00" && r.Diensten === "T001039");
-    const flows = resolveAll(real, opts({ estimates: false })).get(id)!;
+    // Alleen CBS-regels: andere bronnen (overmakingen, hulp) komen er los bij.
+    const flows = resolveAll(real, opts({ estimates: false })).get(id)!.filter((f) => f.source.startsWith("cbs-"));
     const t = totals(flows);
     // Afronding per regel op hele miljoenen: kleine afwijking toegestaan.
     expect(t.uit).toBeCloseTo((g.TotaleInvoerwaarde_1 as number) + (s.InvoerVanDiensten_1 as number), -1);
@@ -228,5 +230,82 @@ describe("echte data", () => {
   it("heeft voor elke regel een bestaande bron", () => {
     for (const c of real.countries) for (const f of c.flows) expect(real.sources[f.source]).toBeDefined();
     for (const r of real.recipients) expect(real.sources[r.source]).toBeDefined();
+  });
+});
+
+// ---- Uitbreidingen: talen, vergelijken, trends, nieuwe bronnen, verhalen ---------------------
+
+import { formatChange, trend } from "./calc";
+import { STORIES } from "./stories";
+import { STRINGS } from "./i18n";
+
+describe("talen en vergelijken", () => {
+  it("formatteert ook in het Engels", () => {
+    expect(format(50_900, "eur", 2024, mini.meta, false, "en")).toBe("€50.9 bn");
+    expect(format(250, "eur", 2024, mini.meta, false, "en")).toBe("€250 m");
+    expect(format(36_000, "pp", 2024, mini.meta, false, "en")).toBe("€2,000 per person");
+  });
+
+  it("geeft procentuele verandering", () => {
+    expect(formatChange(100, 150)).toBe("+50%");
+    expect(formatChange(100, 95)).toBe("−5,0%");
+    expect(formatChange(100, 95, "en")).toBe("−5.0%");
+    expect(formatChange(0, 10)).toBe("nieuw");
+  });
+
+  it("heeft dezelfde vertaalsleutels in beide talen", () => {
+    expect(Object.keys(STRINGS.en).sort()).toEqual(Object.keys(STRINGS.nl).sort());
+  });
+
+  it("pakt de data uit in de gekozen taal", () => {
+    const raw = JSON.parse(readFileSync(join(root, "public/data/geldstromen.json"), "utf8")) as RawDataset;
+    const en = expandDataset(raw, "en");
+    const us = en.countries.find((c) => c.id === "840")!;
+    expect(us.name).toBe("United States");
+    expect(us.altName).toBe("Verenigde Staten");
+    expect(en.meta.notes[0]).toMatch(/Goods/);
+  });
+});
+
+describe("trend", () => {
+  it("geeft een gat (null) in jaren zonder data, geen nul", () => {
+    const data: Dataset = { ...mini, meta: { ...mini.meta, years: [2023, 2024] } };
+    const points = trend(data, DEFAULT_OPTIONS);
+    expect(points[0].t).toBeNull();
+    expect(points[1].t?.uit).toBe(1500);
+  });
+});
+
+describe("nieuwe bronnen (echte data)", () => {
+  const sum = (id: string, year: number, category: string, direction: string) =>
+    resolveAll(real, opts({ year, category: category as never }))
+      .get(id)!
+      .filter((f) => f.direction === direction)
+      .reduce((n, f) => n + f.amount, 0);
+
+  it("EU-begroting 2019: nationale bijdrage en invoerrechten zoals de Europese Commissie publiceert", () => {
+    expect(sum("EU", 2019, "eu", "uit")).toBeCloseTo(5326.0 + 2729.1, -1);
+    expect(sum("EU", 2019, "eu", "in")).toBeCloseTo(2557.1, -1);
+  });
+
+  it("pensioenen naar EU/EFTA/VK in 2024 tellen op tot het totaal van HIVA-tabel 8 (€1.581 mln)", () => {
+    const total = real.countries.reduce((n, c) => n + sum(c.id, 2024, "uitkeringen", "uit"), 0);
+    expect(total).toBeCloseTo(1581, -1);
+  });
+
+  it("ontwikkelingshulp en overmakingen staan bij de juiste landen", () => {
+    expect(sum("804", 2023, "hulp", "uit")).toBeGreaterThan(100); // Oekraïne
+    expect(sum("504", 2024, "overmakingen", "uit")).toBeGreaterThan(100); // Marokko
+  });
+});
+
+describe("verhalen", () => {
+  it("verwijzen naar bestaande landen, jaren en categorieën", () => {
+    for (const s of STORIES) {
+      if (s.state.country) expect(real.countries.some((c) => c.id === s.state.country), s.id).toBe(true);
+      if (s.state.year) expect(real.meta.years, s.id).toContain(s.state.year);
+      if (s.state.compare) expect(real.meta.years, s.id).toContain(s.state.compare);
+      if (s.needs) expect(real.countries.some((c) => c.flows.some((f) => f.category === s.needs)), s.id).toBe(true);
+    }
   });
 });

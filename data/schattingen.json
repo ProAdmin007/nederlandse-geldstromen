@@ -1,36 +1,52 @@
 {
-  "_uitleg": "Cijfers die niet in CBS-statistieken staan. Bedragen in miljoen euro. 'partOf' = zit al in het CBS-cijfer van die categorie (wordt ervan afgetrokken, zodat niets dubbel telt). 'via' = deel van een stroom dat uiteindelijk bij een bedrijf uit een ander land terechtkomt. Elk cijfer heeft een bron; vul alleen cijfers in die je kunt herleiden.",
+  "_uitleg": "Cijfers die niet in CBS-statistieken staan. Bedragen in miljoen euro. 'partOf' = zit al in het CBS-cijfer van die categorie (wordt ervan afgetrokken, zodat niets dubbel telt). 'via' = deel van een stroom dat uiteindelijk bij een bedrijf uit een ander land terechtkomt. Elk cijfer heeft een bron; vul alleen cijfers in die je kunt herleiden. Engelse teksten staan in note_en / name_en / nameEn.",
   "sources": {
     "kamer-defensie-vs": {
       "name": "Lijst van vragen en antwoorden Voorjaarsnota 2025, Kamerstuk 36 725 X nr. 6 (vragen 42–43)",
       "publisher": "Tweede Kamer / Ministerie van Defensie",
-      "url": "https://www.tweedekamer.nl/downloads/document?id=2025D28184"
+      "url": "https://www.tweedekamer.nl/downloads/document?id=2025D28184",
+      "nameEn": "List of questions and answers, Spring Memorandum 2025, parliamentary paper 36 725 X no. 6 (questions 42–43)"
     },
     "dmf-jaarverslag-2025": {
       "name": "Jaarverslag 2025 Defensiematerieelbegrotingsfonds (K)",
       "publisher": "Rijksfinanciën",
-      "url": "https://www.rijksfinancien.nl/jaarverslag/2025/K"
+      "url": "https://www.rijksfinancien.nl/jaarverslag/2025/K",
+      "nameEn": "Annual report 2025, Defence Materiel Budget Fund (K)"
     },
     "kamerbrief-slm-2025": {
       "name": "Kamerbrief over uitgaven aan strategische IT-leveranciers (SLM Rijk), 19 dec 2025 (2025D53289); cijfers via Binnenlands Bestuur",
       "publisher": "Tweede Kamer / BZK",
-      "url": "https://www.binnenlandsbestuur.nl/digitaal/grote-it-contracten-kostten-rijk-vorig-jaar-230-miljoen-euro"
+      "url": "https://www.binnenlandsbestuur.nl/digitaal/grote-it-contracten-kostten-rijk-vorig-jaar-230-miljoen-euro",
+      "nameEn": "Letter to parliament on spending with strategic IT suppliers (SLM Rijk), 19 Dec 2025 (2025D53289); figures via Binnenlands Bestuur"
     },
     "ad-bb-gemeenten-microsoft": {
       "name": "Gemeenten gaven in 2025 bijna 185 miljoen euro uit aan Microsoft (onderzoek AD en Binnenlands Bestuur, 334 van 342 gemeenten)",
       "publisher": "ICT Magazine / AD / Binnenlands Bestuur",
-      "url": "https://www.ictmagazine.nl/nieuws/gemeenten-gaven-in-2025-bijna-185-miljoen-euro-uit-aan-microsoft/"
+      "url": "https://www.ictmagazine.nl/nieuws/gemeenten-gaven-in-2025-bijna-185-miljoen-euro-uit-aan-microsoft/",
+      "nameEn": "Municipalities spent almost €185 million on Microsoft in 2025 (research by AD and Binnenlands Bestuur, 334 of 342 municipalities)"
     },
     "cso-ierland-diensten": {
       "name": "Services Trade by Enterprise Characteristics 2023",
       "publisher": "CSO Ireland",
       "url": "https://www.cso.ie/en/releasesandpublications/ep/p-stec/servicestradebyenterprisecharacteristics2023/"
+    },
+    "eurostat-fats": {
+      "name": "Buitenlandse dochterondernemingen naar land van zeggenschap (fats_activ): Ierland, IT- en informatiediensten (J62–J63), 2023",
+      "nameEn": "Foreign affiliates by country of control (fats_activ): Ireland, IT and information services (J62–J63), 2023",
+      "publisher": "Eurostat",
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/fats_activ/default/table"
     }
   },
   "flows": [
     {
       "country": "840",
-      "years": [2020, 2021, 2022, 2023, 2024],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
       "direction": "uit",
       "sector": "overheid",
       "category": "defensie",
@@ -38,11 +54,18 @@
       "dataType": "schatting",
       "source": "kamer-defensie-vs",
       "partOf": "goederen",
-      "note": "Defensie besteedde 2020–2024 ca. €6,5 mld aan materieel van Amerikaanse leveranciers (o.a. F-35). Jaarbedragen zijn vertrouwelijk; hier gelijk verdeeld (€1,3 mld per jaar)."
+      "note": "Defensie besteedde 2020–2024 ca. €6,5 mld aan materieel van Amerikaanse leveranciers (o.a. F-35). Jaarbedragen zijn vertrouwelijk; hier gelijk verdeeld (€1,3 mld per jaar).",
+      "note_en": "Defence spent about €6.5 bn on materiel from US suppliers in 2020–2024 (including the F-35). Annual amounts are confidential; spread evenly here (€1.3 bn per year)."
     },
     {
       "country": "376",
-      "years": [2020, 2021, 2022, 2023, 2024],
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
       "direction": "uit",
       "sector": "overheid",
       "category": "defensie",
@@ -50,11 +73,14 @@
       "dataType": "schatting",
       "source": "kamer-defensie-vs",
       "partOf": "goederen",
-      "note": "Defensie besteedde 2020–2024 ca. €430 mln aan materieel van Israëlische leveranciers. Jaarbedragen zijn vertrouwelijk; hier gelijk verdeeld."
+      "note": "Defensie besteedde 2020–2024 ca. €430 mln aan materieel van Israëlische leveranciers. Jaarbedragen zijn vertrouwelijk; hier gelijk verdeeld.",
+      "note_en": "Defence spent about €430 m on materiel from Israeli suppliers in 2020–2024. Annual amounts are confidential; spread evenly here."
     },
     {
       "country": "276",
-      "years": [2025],
+      "years": [
+        2025
+      ],
       "direction": "uit",
       "sector": "overheid",
       "category": "defensie",
@@ -62,7 +88,8 @@
       "dataType": "schatting",
       "source": "dmf-jaarverslag-2025",
       "partOf": "goederen",
-      "note": "Aanbetaling Leopard 2A8-tanks in 2025 (€211,2 mln). Het jaarverslag noemt de leverancier niet; toegerekend aan Duitsland (fabrikant KNDS Deutschland)."
+      "note": "Aanbetaling Leopard 2A8-tanks in 2025 (€211,2 mln). Het jaarverslag noemt de leverancier niet; toegerekend aan Duitsland (fabrikant KNDS Deutschland).",
+      "note_en": "Advance payment for Leopard 2A8 tanks in 2025 (€211.2 m). The annual report does not name the supplier; attributed to Germany (manufacturer KNDS Deutschland)."
     }
   ],
   "via": [
@@ -73,16 +100,89 @@
       "to": "840",
       "share": 0.9,
       "dataType": "schatting",
-      "source": "cso-ierland-diensten",
-      "note": "Gefactureerd vanuit Ierland. Volgens CSO komt 100% van de Ierse export van computerdiensten van buitenlandse bedrijven (2023). Het Amerikaanse deel publiceert CSO niet; 90% is een eigen schatting op basis van de grootste spelers (Microsoft, Google, Apple, Meta, Oracle, Salesforce)."
+      "source": "eurostat-fats",
+      "note": "Gefactureerd vanuit Ierland. Volgens Eurostat is 89,9% van de omzet van de Ierse IT- en informatiedienstensector in handen van Amerikaanse bedrijven (2023: €220,5 van €245,2 mld). Dat is omzet, geen export naar Nederland; daarom een schatting. CSO: alle Ierse export van computerdiensten komt van buitenlandse bedrijven.",
+      "note_en": "Billed from Ireland. According to Eurostat, 89.9% of the turnover of Ireland's IT and information services sector is US-controlled (2023: €220.5 of €245.2 bn). That is turnover, not exports to the Netherlands; hence an estimate. CSO: all Irish computer services exports come from foreign-owned companies."
     }
   ],
   "recipients": [
-    { "name": "SLM Rijk: 8 strategische IT-leveranciers", "country": "840", "category": "it", "sector": "overheid", "amount": 126, "year": 2020, "dataType": "schatting", "source": "kamerbrief-slm-2025", "note": "Officieel totaal voor AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat en SAP samen (ministeries en uitvoeringsorganisaties). Geen uitsplitsing per leverancier; toerekening aan de VS is een benadering (KPN is Nederlands, SAP Duits)." },
-    { "name": "SLM Rijk: 8 strategische IT-leveranciers", "country": "840", "category": "it", "sector": "overheid", "amount": 136, "year": 2021, "dataType": "schatting", "source": "kamerbrief-slm-2025", "note": "Officieel totaal voor AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat en SAP samen. Toerekening aan de VS is een benadering (KPN is Nederlands, SAP Duits)." },
-    { "name": "SLM Rijk: 8 strategische IT-leveranciers", "country": "840", "category": "it", "sector": "overheid", "amount": 168, "year": 2022, "dataType": "schatting", "source": "kamerbrief-slm-2025", "note": "Officieel totaal voor AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat en SAP samen. Toerekening aan de VS is een benadering (KPN is Nederlands, SAP Duits)." },
-    { "name": "SLM Rijk: 8 strategische IT-leveranciers", "country": "840", "category": "it", "sector": "overheid", "amount": 135, "year": 2023, "dataType": "schatting", "source": "kamerbrief-slm-2025", "note": "Officieel totaal voor AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat en SAP samen. Toerekening aan de VS is een benadering (KPN is Nederlands, SAP Duits)." },
-    { "name": "SLM Rijk: 8 strategische IT-leveranciers", "country": "840", "category": "it", "sector": "overheid", "amount": 230, "year": 2024, "dataType": "schatting", "source": "kamerbrief-slm-2025", "note": "Officieel totaal voor AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat en SAP samen. Toerekening aan de VS is een benadering (KPN is Nederlands, SAP Duits)." },
-    { "name": "Microsoft (alleen gemeenten)", "country": "840", "category": "it", "sector": "overheid", "amount": 185, "year": 2025, "dataType": "schatting", "source": "ad-bb-gemeenten-microsoft", "note": "Journalistiek onderzoek o.b.v. opgaven en Woo-verzoeken van 334 van de 342 gemeenten. Rijk, onderwijs en zorg niet meegeteld." }
+    {
+      "name": "SLM Rijk: 8 strategische IT-leveranciers",
+      "country": "840",
+      "category": "it",
+      "sector": "overheid",
+      "amount": 126,
+      "year": 2020,
+      "dataType": "schatting",
+      "source": "kamerbrief-slm-2025",
+      "note": "Officieel totaal voor AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat en SAP samen (ministeries en uitvoeringsorganisaties). Geen uitsplitsing per leverancier; toerekening aan de VS is een benadering (KPN is Nederlands, SAP Duits).",
+      "name_en": "SLM Rijk: 8 strategic IT suppliers",
+      "note_en": "Official total for AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat and SAP together (ministries and agencies). No split by supplier; attributing it to the US is an approximation (KPN is Dutch, SAP German)."
+    },
+    {
+      "name": "SLM Rijk: 8 strategische IT-leveranciers",
+      "country": "840",
+      "category": "it",
+      "sector": "overheid",
+      "amount": 136,
+      "year": 2021,
+      "dataType": "schatting",
+      "source": "kamerbrief-slm-2025",
+      "note": "Officieel totaal voor AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat en SAP samen. Toerekening aan de VS is een benadering (KPN is Nederlands, SAP Duits).",
+      "name_en": "SLM Rijk: 8 strategic IT suppliers",
+      "note_en": "Official total for AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat and SAP together (ministries and agencies). No split by supplier; attributing it to the US is an approximation (KPN is Dutch, SAP German)."
+    },
+    {
+      "name": "SLM Rijk: 8 strategische IT-leveranciers",
+      "country": "840",
+      "category": "it",
+      "sector": "overheid",
+      "amount": 168,
+      "year": 2022,
+      "dataType": "schatting",
+      "source": "kamerbrief-slm-2025",
+      "note": "Officieel totaal voor AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat en SAP samen. Toerekening aan de VS is een benadering (KPN is Nederlands, SAP Duits).",
+      "name_en": "SLM Rijk: 8 strategic IT suppliers",
+      "note_en": "Official total for AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat and SAP together (ministries and agencies). No split by supplier; attributing it to the US is an approximation (KPN is Dutch, SAP German)."
+    },
+    {
+      "name": "SLM Rijk: 8 strategische IT-leveranciers",
+      "country": "840",
+      "category": "it",
+      "sector": "overheid",
+      "amount": 135,
+      "year": 2023,
+      "dataType": "schatting",
+      "source": "kamerbrief-slm-2025",
+      "note": "Officieel totaal voor AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat en SAP samen. Toerekening aan de VS is een benadering (KPN is Nederlands, SAP Duits).",
+      "name_en": "SLM Rijk: 8 strategic IT suppliers",
+      "note_en": "Official total for AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat and SAP together (ministries and agencies). No split by supplier; attributing it to the US is an approximation (KPN is Dutch, SAP German)."
+    },
+    {
+      "name": "SLM Rijk: 8 strategische IT-leveranciers",
+      "country": "840",
+      "category": "it",
+      "sector": "overheid",
+      "amount": 230,
+      "year": 2024,
+      "dataType": "schatting",
+      "source": "kamerbrief-slm-2025",
+      "note": "Officieel totaal voor AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat en SAP samen. Toerekening aan de VS is een benadering (KPN is Nederlands, SAP Duits).",
+      "name_en": "SLM Rijk: 8 strategic IT suppliers",
+      "note_en": "Official total for AWS, Google, IBM, KPN, Microsoft, Oracle, Red Hat and SAP together (ministries and agencies). No split by supplier; attributing it to the US is an approximation (KPN is Dutch, SAP German)."
+    },
+    {
+      "name": "Microsoft (alleen gemeenten)",
+      "country": "840",
+      "category": "it",
+      "sector": "overheid",
+      "amount": 185,
+      "year": 2025,
+      "dataType": "schatting",
+      "source": "ad-bb-gemeenten-microsoft",
+      "note": "Journalistiek onderzoek o.b.v. opgaven en Woo-verzoeken van 334 van de 342 gemeenten. Rijk, onderwijs en zorg niet meegeteld.",
+      "name_en": "Microsoft (municipalities only)",
+      "note_en": "Investigative journalism based on statements and FOI requests from 334 of 342 municipalities. Central government, education and healthcare not included."
+    }
   ]
 }

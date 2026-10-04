@@ -9,8 +9,9 @@ import { feature } from "topojson-client";
 import type { FeatureCollection, Geometry } from "geojson";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import world from "world-atlas/countries-110m.json";
-import { ranked } from "@/lib/calc";
-import type { Dataset, Flow } from "@/lib/types";
+import { formatChange, ranked, totals } from "@/lib/calc";
+import type { Strings } from "@/lib/i18n";
+import type { Dataset, Flow, Lang } from "@/lib/types";
 
 const WIDTH = 960;
 const HEIGHT = 500;
@@ -55,6 +56,10 @@ interface Props {
   resolved: Map<string, Flow[]>;
   /** Formatteert een bedrag (mln euro) in de gekozen eenheid. */
   fmt: (amountMln: number, signed?: boolean) => string;
+  /** Weergaveregels voor het vergelijkingsjaar, voor de tooltip. */
+  compare: { year: number; resolved: Map<string, Flow[]> } | null;
+  t: Strings;
+  lang: Lang;
   selectedId: string | null;
   onSelect: (id: string | null) => void;
 }
@@ -76,7 +81,7 @@ function curve(a: [number, number], b: [number, number], bend: number): string {
 
 const nl = project(NL_COORDS);
 
-export default function WorldMap({ data, resolved, fmt, selectedId, onSelect }: Props) {
+export default function WorldMap({ data, resolved, fmt, compare, t, lang, selectedId, onSelect }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const zoomRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null);
@@ -245,7 +250,7 @@ export default function WorldMap({ data, resolved, fmt, selectedId, onSelect }: 
         className="map"
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         role="img"
-        aria-label="Interactieve wereldkaart met geldstromen van en naar Nederland"
+        aria-label={t.mapAria}
         onClick={() => onSelect(null)}
       >
         <g transform={transform.toString()}>
@@ -283,15 +288,15 @@ export default function WorldMap({ data, resolved, fmt, selectedId, onSelect }: 
       </svg>
 
       <div className="map-tools">
-        <button onClick={() => zoomBy(1.6)} aria-label="Inzoomen">+</button>
-        <button onClick={() => zoomBy(1 / 1.6)} aria-label="Uitzoomen">−</button>
-        <button onClick={() => zoomTo(PRESETS.europa)}>Europa</button>
-        <button onClick={() => zoomTo(PRESETS.wereld)}>Wereld</button>
+        <button onClick={() => zoomBy(1.6)} aria-label={t.zoomIn}>+</button>
+        <button onClick={() => zoomBy(1 / 1.6)} aria-label={t.zoomOut}>−</button>
+        <button onClick={() => zoomTo(PRESETS.europa)}>{t.europe}</button>
+        <button onClick={() => zoomTo(PRESETS.wereld)}>{t.world}</button>
         <button
           onClick={() => setMoving((m) => !m)}
           aria-pressed={!moving}
-          aria-label={moving ? "Beweging pauzeren" : "Beweging hervatten"}
-          title={moving ? "Beweging pauzeren" : "Beweging hervatten"}
+          aria-label={moving ? t.pause : t.resume}
+          title={moving ? t.pause : t.resume}
         >
           {moving ? "❚❚" : "▶"}
         </button>
@@ -308,18 +313,30 @@ export default function WorldMap({ data, resolved, fmt, selectedId, onSelect }: 
         >
           <strong>{hovered.country.name}</strong>
           <div className="tooltip__row">
-            <span className="tone-uit">NL → land</span>
+            <span className="tone-uit">{t.nlToLand}</span>
             <span>{fmt(hovered.t.uit)}</span>
           </div>
           <div className="tooltip__row">
-            <span className="tone-in">Land → NL</span>
+            <span className="tone-in">{t.landToNl}</span>
             <span>{fmt(hovered.t.in)}</span>
           </div>
           <div className="tooltip__row tooltip__net">
-            <span>Netto</span>
+            <span>{t.net}</span>
             <span>{fmt(hovered.t.netto, true)}</span>
           </div>
-          <div className="tooltip__hint">Klik voor details</div>
+          {compare && (() => {
+            const p = totals(compare.resolved.get(hovered.country.id) ?? []);
+            const ch = formatChange(p.uit + p.in, hovered.t.uit + hovered.t.in, lang);
+            return ch ? (
+              <div className="tooltip__row tooltip__cmp">
+                <span>
+                  {t.change} {t.vs} {compare.year}
+                </span>
+                <span>{ch}</span>
+              </div>
+            ) : null;
+          })()}
+          <div className="tooltip__hint">{t.clickForDetails}</div>
         </div>
       )}
     </div>

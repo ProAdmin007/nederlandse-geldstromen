@@ -11,7 +11,17 @@ export type Direction = "uit" | "in"; // uit = NL → land, in = land → NL
  */
 export type Sector = "overheid" | "bedrijven" | "consumenten";
 
-export type Category = "it" | "energie" | "goederen" | "diensten" | "defensie" | "ie";
+export type Category =
+  | "it"
+  | "energie"
+  | "goederen"
+  | "diensten"
+  | "defensie"
+  | "ie"
+  | "hulp" // ontwikkelingshulp
+  | "eu" // EU-begroting: afdrachten en EU-uitgaven in Nederland
+  | "uitkeringen" // AOW e.d. betaald aan mensen in het buitenland
+  | "overmakingen"; // geld dat migranten naar familie sturen
 
 /**
  * officieel  = direct overgenomen uit een officiële statistiek
@@ -20,8 +30,11 @@ export type Category = "it" | "energie" | "goederen" | "diensten" | "defensie" |
  */
 export type DataType = "officieel" | "berekend" | "schatting";
 
+export type Lang = "nl" | "en";
+
 export interface Source {
   name: string;
+  nameEn?: string;
   publisher: string;
   url?: string;
 }
@@ -67,6 +80,7 @@ export interface Via {
 
 export interface Recipient {
   name: string;
+  nameEn?: string;
   /** Land waar de ontvanger (moederbedrijf) gevestigd is. */
   country: string;
   /** Land waar de factuur vandaan komt, als dat afwijkt (bv. Ierland). */
@@ -81,9 +95,11 @@ export interface Recipient {
 }
 
 export interface Country {
-  /** ISO 3166-1 numeriek als string met voorloopnullen (bv. "056"); koppelt aan de kaart. */
+  /** ISO 3166-1 numeriek als string met voorloopnullen (bv. "056"); koppelt aan de kaart. "EU" = EU-begroting. */
   id: string;
   name: string;
+  /** Naam in de andere taal, voor het zoekveld. */
+  altName?: string;
   /** [lengtegraad, breedtegraad] van het eindpunt op de kaart. */
   coords: [number, number];
   flows: Flow[];
@@ -100,6 +116,8 @@ export interface Dataset {
     population: Record<string, number>;
     /** Bbp in miljoen euro, werkelijke prijzen. */
     gdp: Record<string, number>;
+    /** Jaren waarin een reeks van methode wisselt; trendlijnen breken daar af. */
+    breaks: { year: number; label: string }[];
     notes: string[];
   };
   netherlands: { id: string; coords: [number, number] };

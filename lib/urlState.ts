@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { CategoryFilter, SectorFilter, Unit } from "./calc";
+import type { Lang } from "./types";
 
 export interface ViewState {
   year: number;
@@ -13,10 +14,15 @@ export interface ViewState {
   ultimate: boolean;
   table: boolean;
   country: string | null;
+  /** Vergelijkingsjaar, of null. */
+  compare: number | null;
+  lang: Lang;
+  /** Actief verhaal (id uit lib/stories.ts), of null. */
+  story: string | null;
 }
 
 const SECTORS: SectorFilter[] = ["alles", "overheid", "bedrijven", "consumenten"];
-const CATS: CategoryFilter[] = ["alles", "it", "energie", "goederen", "diensten", "defensie", "ie"];
+const CATS: CategoryFilter[] = ["alles", "it", "energie", "goederen", "diensten", "defensie", "ie", "hulp", "eu", "uitkeringen", "overmakingen"];
 const UNITS: Unit[] = ["eur", "pp", "bbp"];
 
 /** Leest de stand uit de URL, zodat een gedeelde link precies hetzelfde beeld geeft. */
@@ -34,6 +40,9 @@ export function parse(search: string, fallback: ViewState, years: number[]): Vie
     ultimate: q.get("ontvanger") === "uiteindelijk",
     table: q.get("weergave") === "tabel",
     country: q.get("land") || null,
+    compare: years.includes(Number(q.get("vergelijk"))) ? Number(q.get("vergelijk")) : null,
+    lang: q.get("lang") === "en" ? "en" : q.get("lang") === "nl" ? "nl" : fallback.lang,
+    story: q.get("verhaal") || null,
   };
 }
 
@@ -49,6 +58,9 @@ export function serialize(s: ViewState, fallback: ViewState): string {
   if (s.ultimate) q.set("ontvanger", "uiteindelijk");
   if (s.table) q.set("weergave", "tabel");
   if (s.country) q.set("land", s.country);
+  if (s.compare != null) q.set("vergelijk", String(s.compare));
+  if (s.lang !== "nl") q.set("lang", s.lang);
+  if (s.story) q.set("verhaal", s.story);
   const str = q.toString();
   return str ? `?${str}` : "";
 }

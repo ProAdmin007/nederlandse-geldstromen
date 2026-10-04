@@ -7,6 +7,11 @@
 //   84765NED  Internationale handel; invoer en uitvoer van diensten naar land
 //   85496NED  Bevolking; kerncijfers
 //   85879NED  Bbp, productie en bestedingen; waarden
+//
+// Oudere reeksen (andere methode; de app toont de breuk):
+//   83028NED  In-, (weder)uitvoer, SITC (1 digit), landen(groepen), 2002-2022  → gebruikt t/m 2014
+//   82616NED  Internationale handel; invoer en uitvoer van diensten 2014-2020  → gebruikt t/m 2019
+//   80414ned  Internationale handel; invoer en uitvoer van diensten naar land, 2003-2013
 
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
@@ -72,11 +77,30 @@ const TABLES = {
       select: "Landen,Diensten,Perioden,InvoerVanDiensten_1,UitvoerVanDiensten_2",
       dims: ["Landen", "Diensten", "Perioden"],
     }),
+  "cbs-goederen-2002": () =>
+    table("83028NED", {
+      filter: `${yearly} and (SITC eq 'T001082' or SITC eq 'A018591')`,
+      select: "LandenGroepen,SITC,Perioden,Invoerwaarde_1,TotaleUitvoerwaarde_2,Wederuitvoerwaarde_3,UitvoerwaardeNederlandsProduct_4",
+      dims: ["LandenGroepen", "SITC", "Perioden"],
+    }),
+  "cbs-diensten-2014": () =>
+    table("82616NED", {
+      filter: `${yearly} and (Diensten eq 'T001039' or Diensten eq 'A007856' or Diensten eq 'A007847' or Diensten eq 'A007827' or Diensten eq 'A007903')`,
+      select: "Landen,Diensten,Perioden,InvoerVanDiensten_1,UitvoerVanDiensten_2",
+      dims: ["Landen", "Diensten", "Perioden"],
+    }),
+  "cbs-diensten-2003": () =>
+    table("80414ned", {
+      filter: `${yearly} and (InvoerUitvoerEnSaldo eq 'I' or InvoerUitvoerEnSaldo eq 'E')`,
+      select:
+        "Landen,InvoerUitvoerEnSaldo,Perioden,TotaalDiensten_1,Telecommunicatiediensten_31,TotaalComputerEnInformatiediensten_37,TotaalRoyaltySEnLicentierechten_40,Prive_28,OverheidsdienstenNietEldersGenoemd_60",
+      dims: ["Landen", "Perioden"],
+    }),
   "cbs-bevolking": () =>
-    table("85496NED", { filter: "Perioden ge '2014JJ00'", select: "Perioden,TotaleBevolking_1", dims: [] }),
+    table("85496NED", { filter: "Perioden ge '2001JJ00'", select: "Perioden,TotaleBevolking_1", dims: [] }),
   "cbs-bbp": () =>
     table("85879NED", {
-      filter: `${yearly} and SoortGegevens eq 'A045297' and Perioden ge '2014JJ00'`,
+      filter: `${yearly} and SoortGegevens eq 'A045297' and Perioden ge '2001JJ00'`,
       select: "Perioden,BrutoBinnenlandsProduct_2",
       dims: [],
     }),

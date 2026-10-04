@@ -1,5 +1,5 @@
 // Pure rekenfuncties: geen React, geen fetch. Getest in lib/calc.test.ts.
-import type { Adjustment, Category, Country, DataType, Dataset, Flow, Recipient, Sector } from "./types";
+import type { Adjustment, Category, Country, DataType, Dataset, Flow, Lang, Recipient, Sector } from "./types";
 
 export type SectorFilter = "alles" | Sector;
 export type CategoryFilter = "alles" | Category;
@@ -144,12 +144,17 @@ export function totalsBy<K extends string>(flows: Flow[], keys: readonly K[], ke
   return out;
 }
 
-/** Totalen per jaar voor één land (of alle landen), voor de trendgrafiek. */
-export function trend(data: Dataset, opts: Omit<Options, "year">, countryId?: string): { year: number; t: Totals }[] {
+/**
+ * Totalen per jaar voor één land (of alle landen), voor de trendgrafiek.
+ * `t` is null in jaren waarvoor deze selectie bij geen enkel land data heeft (bv. nog niet
+ * gepubliceerd): dat is een gat, geen nul.
+ */
+export function trend(data: Dataset, opts: Omit<Options, "year">, countryId?: string): { year: number; t: Totals | null }[] {
   return data.meta.years.map((year) => {
     const all = resolveAll(data, { ...opts, year });
-    const flows = countryId ? all.get(countryId) ?? [] : [...all.values()].flat();
-    return { year, t: totals(flows) };
+    const everywhere = [...all.values()].flat();
+    if (!everywhere.length) return { year, t: null };
+    return { year, t: totals(countryId ? all.get(countryId) ?? [] : everywhere) };
   });
 }
 
@@ -201,23 +206,58 @@ export function convert(amountMln: number, unit: Unit, year: number, meta: Datas
   return amountMln;
 }
 
-const nf1 = new Intl.NumberFormat("nl-NL", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-const nf0 = new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 });
-const nf2 = new Intl.NumberFormat("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const NF = {
+  nl: {
+    f0: new Intl.NumberFormat("nl-NL", { maximumFractionDigits: 0 }),
+    f1: new Intl.NumberFormat("nl-NL", { minimumFractionDigits: 1, maximumFractionDigits: 1 }),
+    f2: new Intl.NumberFormat("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+    bn: "mld",
+    m: "mln",
+    pp: "p.p.",
+    gdp: "bbp",
+  },
+  en: {
+    f0: new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 }),
+    f1: new Intl.NumberFormat("en-GB", { minimumFractionDigits: 1, maximumFractionDigits: 1 }),
+    f2: new Intl.NumberFormat("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+    bn: "bn",
+    m: "m",
+    pp: "per person",
+    gdp: "of GDP",
+  },
+};
 
 /** Formatteert een al omgerekende waarde. */
-export function formatValue(value: number, unit: Unit, signed = false): string {
+export function formatValue(value: number, unit: Unit, signed = false, lang: Lang = "nl"): string {
   if (!isFinite(value)) return "–";
+  const n = NF[lang];
   const sign = signed && value > 0.0001 ? "+" : value < -0.0001 ? "−" : "";
   const v = Math.abs(value);
-  if (unit === "pp") return `${sign}€${nf0.format(v)} p.p.`;
-  if (unit === "bbp") return `${sign}${v < 0.1 ? nf2.format(v) : nf1.format(v)}% bbp`;
-  if (v >= 1000) return `${sign}€${nf1.format(v / 1000)} mld`;
-  return `${sign}€${nf0.format(v)} mln`;
+  if (unit === "pp") return `${sign}€${n.f0.format(v)} ${n.pp}`;
+  if (unit === "bbp") return `${sign}${v < 0.1 ? n.f2.format(v) : n.f1.format(v)}% ${n.gdp}`;
+  if (v >= 1000) return `${sign}€${n.f1.format(v / 1000)} ${n.bn}`;
+  if (v >= 10 || v === 0) return `${sign}€${n.f0.format(v)} ${n.m}`;
+  return `${sign}€${n.f1.format(v)} ${n.m}`;
 }
 
-export function format(amountMln: number, unit: Unit, year: number, meta: Dataset["meta"], signed = false): string {
-  return formatValue(convert(amountMln, unit, year, meta), unit, signed);
+export function format(
+  amountMln: number,
+  unit: Unit,
+  year: number,
+  meta: Dataset["meta"],
+  signed = false,
+  lang: Lang = "nl",
+): string {
+  return formatValue(convert(amountMln, unit, year, meta), unit, signed, lang);
+}
+
+/** Procentuele verandering van a naar b, als tekst ("+12%"); leeg als het niet zinvol is. */
+export function formatChange(from: number, to: number, lang: Lang = "nl"): string {
+  if (!isFinite(from) || !isFinite(to) || Math.abs(from) < 1e-9) return to > 0 ? (lang === "en" ? "new" : "nieuw") : "";
+  const pct = ((to - from) / Math.abs(from)) * 100;
+  const n = NF[lang];
+  const sign = pct > 0.05 ? "+" : pct < -0.05 ? "−" : "";
+  return `${sign}${Math.abs(pct) >= 10 ? n.f0.format(Math.abs(pct)) : n.f1.format(Math.abs(pct))}%`;
 }
 
 export function yearsOf(items: { year: number }[]): string {
@@ -242,22 +282,13 @@ const csvCell = (v: string | number) => {
 };
 
 /** CSV (puntkomma, Nederlandse Excel-instelling) van alle weergaveregels. */
-export function toCsv(data: Dataset, resolved: Map<string, Flow[]>, opts: Options): string {
-  const header = [
-    "jaar",
-    "land",
-    "iso_numeriek",
-    "richting",
-    "sector",
-    "categorie",
-    "bedrag_mln_eur",
-    "datatype",
-    "bron",
-    "bron_url",
-    "toelichting",
-    "verplaatst_van",
-    "aftrekposten",
-  ];
+export function toCsv(data: Dataset, resolved: Map<string, Flow[]>, opts: Options, lang: Lang = "nl"): string {
+  const header =
+    lang === "en"
+      ? ["year", "country", "iso_numeric", "direction", "sector", "category", "amount_m_eur", "data_type", "source", "source_url", "note", "moved_from", "subtractions"]
+      : ["jaar", "land", "iso_numeriek", "richting", "sector", "categorie", "bedrag_mln_eur", "datatype", "bron", "bron_url", "toelichting", "verplaatst_van", "aftrekposten"];
+  const dir = (d: Flow["direction"]) =>
+    lang === "en" ? (d === "uit" ? "NL to country" : "country to NL") : d === "uit" ? "NL naar land" : "land naar NL";
   const lines = [header.join(";")];
   for (const c of data.countries) {
     for (const f of resolved.get(c.id) ?? []) {
@@ -267,7 +298,7 @@ export function toCsv(data: Dataset, resolved: Map<string, Flow[]>, opts: Option
           opts.year,
           c.name,
           c.id,
-          f.direction === "uit" ? "NL naar land" : "land naar NL",
+          dir(f.direction),
           f.sector,
           f.category,
           f.amount.toFixed(1).replace(".", ","),

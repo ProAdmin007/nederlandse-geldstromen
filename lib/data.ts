@@ -1,46 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { expandDataset, type RawDataset } from "./dataset";
-import type { Category, DataType, Dataset } from "./types";
-import type { CategoryFilter, SectorFilter, Unit } from "./calc";
+import type { Category, Dataset, Lang } from "./types";
 
-export const SECTOR_LABELS: Record<SectorFilter, string> = {
-  alles: "Alles",
-  overheid: "Overheid",
-  bedrijven: "Bedrijven",
-  consumenten: "Consumenten",
-};
-
-export const CATEGORIES: Category[] = ["goederen", "energie", "diensten", "it", "ie", "defensie"];
-
-export const CATEGORY_LABELS: Record<CategoryFilter, string> = {
-  alles: "Alle categorieën",
-  it: "IT / software / cloud",
-  energie: "Energie",
-  goederen: "Goederen",
-  diensten: "Diensten",
-  defensie: "Defensie",
-  ie: "Intellectueel eigendom",
-};
-
-export const DATATYPE_LABELS: Record<DataType, string> = {
-  officieel: "Officieel",
-  berekend: "Berekend",
-  schatting: "Schatting",
-};
-
-export const UNIT_LABELS: Record<Unit, string> = {
-  eur: "Euro",
-  pp: "Per inwoner",
-  bbp: "% bbp",
-};
+/** Volgorde waarin categorieën in filters en grafieken staan. */
+export const CATEGORIES: Category[] = [
+  "goederen",
+  "energie",
+  "diensten",
+  "it",
+  "ie",
+  "defensie",
+  "hulp",
+  "eu",
+  "uitkeringen",
+  "overmakingen",
+];
 
 const DATA_URL = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/data/geldstromen.json`;
 
-/** Laadt public/data/geldstromen.json (gegenereerd door npm run data:build). */
-export function useDataset(): { data: Dataset | null; error: string | null } {
-  const [data, setData] = useState<Dataset | null>(null);
+/** Laadt public/data/geldstromen.json (gegenereerd door npm run data:build) in de gekozen taal. */
+export function useDataset(lang: Lang): { data: Dataset | null; error: string | null } {
+  const [raw, setRaw] = useState<RawDataset | null>(null);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     fetch(DATA_URL)
@@ -48,8 +30,9 @@ export function useDataset(): { data: Dataset | null; error: string | null } {
         if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
         return r.json() as Promise<RawDataset>;
       })
-      .then((raw) => setData(expandDataset(raw)))
+      .then(setRaw)
       .catch((e: Error) => setError(e.message));
   }, []);
+  const data = useMemo(() => (raw ? expandDataset(raw, lang) : null), [raw, lang]);
   return { data, error };
 }
