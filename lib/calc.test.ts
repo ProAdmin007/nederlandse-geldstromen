@@ -106,6 +106,8 @@ const mini: Dataset = {
     },
     { id: "840", name: "Verenigde Staten", coords: [-98, 39], flows: [flow({ category: "it", amount: 500 })] },
   ],
+  taxes: [],
+  taxContext: [],
   recipients: [
     { name: "X", country: "840", billedFrom: "372", category: "it", sector: "bedrijven", amount: 5, year: 2023, dataType: "schatting", source: "est" },
   ],
@@ -333,5 +335,19 @@ describe("defensie", () => {
   it("gerealiseerde betalingen blijven zichtbaar als schattingen uit staan", () => {
     const flows = resolveAll(real, opts({ year: 2025, category: "defensie", estimates: false })).get("840")!;
     expect(totals(flows).uit).toBeCloseTo(751.2, 0);
+  });
+});
+
+describe("belasting", () => {
+  it("heeft voor elk cijfer en contextpunt een bestaande bron", () => {
+    expect(real.taxes.length).toBeGreaterThan(5);
+    for (const r of real.taxes) expect(real.sources[r.source], r.company).toBeDefined();
+    for (const c of real.taxContext) expect(real.sources[c.source], c.text).toBeDefined();
+  });
+
+  it("bevat het Microsoft-landenrapport voor Nederland", () => {
+    const ms = real.taxes.find((r) => r.company === "Microsoft" && r.country === "528")!;
+    expect(ms.profit).toBeCloseTo(311.8, 0);
+    expect(ms.taxPaid).toBeCloseTo(105.5, 0);
   });
 });

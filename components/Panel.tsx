@@ -123,6 +123,7 @@ function FilterNotes({ ctx }: { ctx: Ctx }) {
   if (!opts.reexport) notes.push(t.noteNoReexport);
   if (opts.ultimate) notes.push(t.noteUltimate);
   if (opts.category === "defensie") notes.push(t.noteDefense);
+  if (opts.category === "it" || opts.category === "ie") notes.push(t.noteIntraGroup);
   if (!notes.length) return null;
   return (
     <ul className="filter-notes">
@@ -249,6 +250,7 @@ export function CountryDetail({ country, ctx, onClose }: { country: Country; ctx
       {flows.length === 0 ? <p className="muted">{ctx.t.noFlows}</p> : <CategoryBars flows={flows} ctx={ctx} />}
 
       <Recipients ctx={ctx} countryId={country.id} title={ctx.t.recipients} />
+      {["alles", "it", "ie", "diensten"].includes(ctx.opts.category) && <TaxSection ctx={ctx} countryId={country.id} />}
 
       {sorted.length > 0 && (
         <>
@@ -281,6 +283,95 @@ export function CountryDetail({ country, ctx, onClose }: { country: Country; ctx
         </>
       )}
     </div>
+  );
+}
+
+const COUNTRY_SHORT: Record<string, Record<Lang, string>> = {
+  "528": { nl: "Nederland", en: "Netherlands" },
+  "372": { nl: "Ierland", en: "Ireland" },
+  "442": { nl: "Luxemburg", en: "Luxembourg" },
+  "840": { nl: "VS", en: "US" },
+};
+
+/** Omzet, winst en belasting per concern en land (uit landenrapporten). */
+export function TaxSection({ ctx, countryId }: { ctx: Ctx; countryId?: string }) {
+  const { t, lang } = ctx;
+  const rows = ctx.data.taxes.filter((r) => !countryId || r.parent === countryId || r.country === countryId);
+  if (!rows.length) return null;
+  const nf = new Intl.NumberFormat(lang === "en" ? "en-GB" : "nl-NL", { maximumFractionDigits: 0 });
+  const money = (v: number | undefined, cur: string) => {
+    if (v == null) return "–";
+    const sym = cur === "USD" ? "$" : "€";
+    return Math.abs(v) >= 1000
+      ? `${sym}${new Intl.NumberFormat(lang === "en" ? "en-GB" : "nl-NL", { maximumFractionDigits: 1 }).format(v / 1000)} ${lang === "en" ? "bn" : "mld"}`
+      : `${sym}${nf.format(v)} ${lang === "en" ? "m" : "mln"}`;
+  };
+  const companies = [...new Set(rows.map((r) => r.company))];
+  return (
+    <>
+      <h3>{t.taxTitle}</h3>
+      <p className="muted small">{t.taxIntro}</p>
+      {companies.map((company) => {
+        const list = rows
+          .filter((r) => r.company === company)
+          .sort((a, b) => (a.country === "528" ? -1 : b.country === "528" ? 1 : 0) || b.year - a.year);
+        return (
+          <div key={company} className="tax">
+            <strong>{company}</strong>
+            <table className="tax__table">
+              <thead>
+                <tr>
+                  <th />
+                  <th className="num">{t.taxRevenue}</th>
+                  <th className="num">{t.taxProfit}</th>
+                  <th className="num">{t.taxPaid}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {list.map((r, i) => {
+                  const tax = r.taxPaid ?? r.taxAccrued;
+                  const rate = tax != null && r.profit ? Math.round((tax / r.profit) * 100) : null;
+                  return (
+                    <tr key={i} className={r.country === "528" ? "is-nl" : undefined}>
+                      <th scope="row">
+                        {COUNTRY_SHORT[r.country]?.[lang] ?? r.country} <span className="muted small">{r.period ?? r.year}</span>
+                      </th>
+                      <td className="num">{money(r.revenue, r.currency)}</td>
+                      <td className="num">{money(r.profit, r.currency)}</td>
+                      <td className="num">
+                        {money(tax, r.currency)}
+                        {rate != null && <div className="muted small">{rate}% {t.taxRate}</div>}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            {list.map((r, i) => (
+              <div key={i} className="small">
+                {r.note && <div className="muted">{r.note}</div>}
+                <SourceRef ctx={ctx} id={r.source} year={r.period ?? r.year} />
+              </div>
+            ))}
+          </div>
+        );
+      })}
+      {ctx.data.taxContext.length > 0 && (
+        <>
+          <h3>{t.taxContextTitle}</h3>
+          <ul className="rows">
+            {ctx.data.taxContext.map((c) => (
+              <li key={c.text} className="row">
+                <div className="row__main small">
+                  {c.text}
+                  <SourceRef ctx={ctx} id={c.source} year="" />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </>
   );
 }
 
@@ -340,6 +431,7 @@ export function Overview({ ctx, onSelect }: { ctx: Ctx; onSelect: (id: string) =
       )}
 
       <Recipients ctx={ctx} title={cat === "alles" ? ctx.t.recipients : ctx.t.recipientsCat} />
+      {(cat === "it" || cat === "ie") && <TaxSection ctx={ctx} />}
       <p className="muted small">
         {ctx.t.yearsWithData}: {ctx.data.meta.years[0]}–{ctx.data.meta.years[ctx.data.meta.years.length - 1]}.
       </p>

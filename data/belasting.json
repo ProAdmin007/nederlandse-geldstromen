@@ -1,0 +1,246 @@
+{
+  "_uitleg": "Omzet, winst en belasting van (vooral Amerikaanse) techbedrijven per land, uit hun openbare landenrapporten (EU public country-by-country reporting) of jaarrekeningen. Bedragen in miljoenen van de genoemde valuta; employees = aantal werknemers. Dit zijn geen geldstromen tussen landen, maar context: hoeveel van de omzet blijft er als winst en belasting in Nederland.",
+  "sources": {
+    "ms-cbcr-2025": {
+      "name": "Microsoft EU public country-by-country report, boekjaar juli 2024 – juni 2025",
+      "nameEn": "Microsoft EU public country-by-country report, fiscal year July 2024 – June 2025",
+      "publisher": "Microsoft",
+      "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/FY25-Microsoft-EU-Directive-2021-2101-Report.pdf"
+    },
+    "google-ie-2024": {
+      "name": "Booked in Dublin: Google's European finances in 2024 (jaarrekening Google Ireland Ltd)",
+      "nameEn": "Booked in Dublin: Google's European finances in 2024 (Google Ireland Ltd accounts)",
+      "publisher": "Global Media Ownership",
+      "url": "https://globalmediaownership.com/booked-in-dublin-googles-european-finances-in-2024/"
+    },
+    "quote-google-2016": {
+      "name": "Google betaalt 3 miljoen belasting in Nederland over 16 miljard aan inkomsten",
+      "nameEn": "Google pays 3 million in tax in the Netherlands on 16 billion of income",
+      "publisher": "Quote",
+      "url": "https://www.quotenet.nl/financien/belasting/a208876/google-betaalt-3-miljoen-belasting-in-nederland-over-16-miljard-aan-inkomsten-208876/"
+    },
+    "meta-ie-2024": {
+      "name": "Profits at Facebook parent Meta Ireland surge 57% (jaarrekening Meta Platforms Ireland Ltd 2024)",
+      "nameEn": "Profits at Facebook parent Meta Ireland surge 57% (Meta Platforms Ireland Ltd 2024 accounts)",
+      "publisher": "The Irish Times",
+      "url": "https://www.irishtimes.com/business/2025/11/26/profits-at-facebook-parent-meta-ireland-surge-57-to-29bn/"
+    },
+    "apple-cbcr-2025": {
+      "name": "Apple Inc. EU public country-by-country report, boekjaar 2025 (okt 2024 – sep 2025)",
+      "nameEn": "Apple Inc. EU public country-by-country report, fiscal year 2025 (Oct 2024 – Sep 2025)",
+      "publisher": "Apple",
+      "url": "https://www.apple.com/legal/more-resources/docs/Apple-Inc-EU-pCbCR-FY25.pdf"
+    },
+    "taxplorer-cisco": {
+      "name": "Taxplorer: Cisco, EU-landenrapport boekjaar tot juli 2025 (omgerekend naar euro)",
+      "nameEn": "Taxplorer: Cisco, EU country-by-country report fiscal year to July 2025 (converted to euro)",
+      "publisher": "EU Tax Observatory",
+      "url": "https://www.taxplorer.eu/company/cisco/"
+    },
+    "nos-netflix-2024": {
+      "name": "Netflix Nederland ontving 15,8 miljard euro aan abonnementsgeld (jaarrekening 2023)",
+      "nameEn": "Netflix Netherlands received €15.8 billion in subscription fees (2023 annual accounts)",
+      "publisher": "NOS",
+      "url": "https://nos.nl/l/2525012"
+    },
+    "kst-25087-357": {
+      "name": "Kamerbrief over doorstroomvennootschappen en bronbelasting, Kamerstuk 25087 nr. 357 (15 dec 2025), met DNB-cijfers",
+      "nameEn": "Letter to parliament on conduit companies and withholding tax, parliamentary paper 25087 no. 357 (15 Dec 2025), with DNB figures",
+      "publisher": "Tweede Kamer / Ministerie van Financiën",
+      "url": "https://zoek.officielebekendmakingen.nl/kst-25087-357.html"
+    },
+    "cbs-84120": {
+      "name": "Overheid; belastingen en sociale premies (84120NED)",
+      "nameEn": "Government; taxes and social contributions (84120NED)",
+      "publisher": "CBS StatLine",
+      "url": "https://opendata.cbs.nl/statline/#/CBS/nl/dataset/84120NED/table"
+    },
+    "mn-2027": {
+      "name": "Miljoenennota 2027, bijlagen",
+      "nameEn": "Budget Memorandum 2027, annexes",
+      "publisher": "Rijksoverheid",
+      "url": "https://www.rijksoverheid.nl/site/binaries/site-content/collections/documents/2026/09/15/bijlagen-bij-miljoenennota-2027/01-miljoenennota-bijlage-pdf.pdf"
+    },
+    "ter-haar-2020": {
+      "name": "Rapport Adviescommissie belastingheffing van multinationals (Commissie Ter Haar), 2020",
+      "nameEn": "Report of the Advisory Committee on the taxation of multinationals (Ter Haar Committee), 2020",
+      "publisher": "Ministerie van Financiën",
+      "url": "https://www.rijksfinancien.nl/modules/custom/rijksfinancien_visuals/assets/bouwstenen_belastingstelsel/data/rapporten/11.%20Rapport+Adviescommissie+ter+Haar.pdf"
+    },
+    "belastingdienst-eb-2025": {
+      "name": "Tarieven energiebelasting 2025",
+      "nameEn": "Energy tax rates 2025",
+      "publisher": "Belastingdienst",
+      "url": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/overige_belastingen/belastingen_op_milieugrondslag/energiebelasting/energiebelasting"
+    }
+  },
+  "records": [
+    {
+      "company": "Microsoft",
+      "country": "528",
+      "parent": "840",
+      "year": 2025,
+      "period": "2024/25",
+      "currency": "USD",
+      "revenue": 6187,
+      "profit": 311.8,
+      "taxPaid": 105.5,
+      "taxAccrued": 105,
+      "employees": 1929,
+      "dataType": "officieel",
+      "source": "ms-cbcr-2025",
+      "note": "Alle Nederlandse dochters samen, o.a. Microsoft B.V., Microsoft Datacenter Netherlands, LinkedIn, GitHub en Activision Blizzard. 1.929 werknemers. Opgebouwde resultaten in Nederland: −$8,4 mld.",
+      "note_en": "All Dutch subsidiaries combined, including Microsoft B.V., Microsoft Datacenter Netherlands, LinkedIn, GitHub and Activision Blizzard. 1,929 employees. Accumulated earnings in the Netherlands: −$8.4 bn."
+    },
+    {
+      "company": "Microsoft",
+      "country": "372",
+      "parent": "840",
+      "year": 2025,
+      "period": "2024/25",
+      "currency": "USD",
+      "revenue": 196030.4,
+      "profit": 47083,
+      "taxPaid": 5584.8,
+      "taxAccrued": 6645.8,
+      "employees": 6654,
+      "dataType": "officieel",
+      "source": "ms-cbcr-2025",
+      "note": "Ierland: hier boekt Microsoft een groot deel van de Europese omzet (ook van Nederlandse klanten). 6.654 werknemers.",
+      "note_en": "Ireland: Microsoft books much of its European revenue here (including from Dutch customers). 6,654 employees."
+    },
+    {
+      "company": "Google",
+      "country": "528",
+      "parent": "840",
+      "year": 2016,
+      "currency": "EUR",
+      "revenue": 16000,
+      "profit": 12.6,
+      "taxPaid": 3,
+      "dataType": "officieel",
+      "source": "quote-google-2016",
+      "note": "Google Netherlands Holdings B.V., de 'Dutch sandwich': ontving €16 mld aan royalty's (o.a. €12,3 mld van Google Ireland) en sluisde die door naar Bermuda. Over 2012–2019 ging zo €128 mld door Nederland, met ruim €25 mln Nederlandse belasting (0,02%). Google stopte ermee na 2019. Uit de jaarrekening, via Quote en NOS.",
+      "note_en": "Google Netherlands Holdings B.V., the 'Dutch sandwich': received €16 bn in royalties (incl. €12.3 bn from Google Ireland) and passed it on to Bermuda. Over 2012–2019 €128 bn went through the Netherlands this way, with just over €25 m in Dutch tax (0.02%). Google ended the structure after 2019. From the annual accounts, via Quote and NOS."
+    },
+    {
+      "company": "Google",
+      "country": "372",
+      "parent": "840",
+      "year": 2024,
+      "currency": "EUR",
+      "revenue": 86600,
+      "profit": 4534.5,
+      "taxAccrued": 574.5,
+      "dataType": "berekend",
+      "source": "google-ie-2024",
+      "note": "Google Ireland Ltd, jaarrekening 2024: hier factureert Google de advertenties van Nederlandse adverteerders. Winst vóór belasting berekend als winst na belasting (€3,96 mld) plus belastinglast (€574,5 mln). Een Nederlands landenrapport van Google verschijnt pas eind 2026.",
+      "note_en": "Google Ireland Ltd, 2024 accounts: Google bills Dutch advertisers from here. Profit before tax calculated as profit after tax (€3.96 bn) plus tax charge (€574.5 m). Google's Dutch country-by-country report is not due until end of 2026."
+    },
+    {
+      "company": "Meta",
+      "country": "372",
+      "parent": "840",
+      "year": 2024,
+      "currency": "EUR",
+      "revenue": 85290,
+      "profit": 2900,
+      "taxAccrued": 366.8,
+      "employees": 1738,
+      "dataType": "officieel",
+      "source": "meta-ie-2024",
+      "note": "Meta Platforms Ireland Ltd, jaarrekening 2024: hier factureert Meta advertenties op Facebook en Instagram in Europa. Nederlandse cijfers en het EU-landenrapport zijn nog niet openbaar (verwacht eind 2026).",
+      "note_en": "Meta Platforms Ireland Ltd, 2024 accounts: Meta bills Facebook and Instagram advertising in Europe from here. Dutch figures and the EU country-by-country report are not yet public (expected end of 2026)."
+    },
+    {
+      "company": "Apple",
+      "country": "528",
+      "parent": "840",
+      "year": 2025,
+      "period": "2024/25",
+      "currency": "USD",
+      "revenue": 469.2,
+      "profit": 102.1,
+      "taxPaid": 31.5,
+      "taxAccrued": 32.8,
+      "employees": 435,
+      "dataType": "officieel",
+      "source": "apple-cbcr-2025",
+      "note": "Apple Benelux, Apple Holding en Apple Retail Netherlands (winkels), 435 werknemers. Inclusief verkopen tussen concernonderdelen.",
+      "note_en": "Apple Benelux, Apple Holding and Apple Retail Netherlands (stores), 435 employees. Includes sales between group companies."
+    },
+    {
+      "company": "Apple",
+      "country": "372",
+      "parent": "840",
+      "year": 2025,
+      "period": "2024/25",
+      "currency": "USD",
+      "revenue": 213562.6,
+      "profit": 34641.9,
+      "taxPaid": 17081.2,
+      "taxAccrued": 4781.2,
+      "employees": 5575,
+      "dataType": "officieel",
+      "source": "apple-cbcr-2025",
+      "note": "Ierland. De betaalde belasting is eenmalig hoog door de vrijgegeven €13 mld na de staatssteunzaak van de Europese Commissie; de lopende belasting is $4,8 mld.",
+      "note_en": "Ireland. Tax paid is one-off high due to the release of €13 bn after the European Commission state aid case; current-year tax is $4.8 bn."
+    },
+    {
+      "company": "Cisco",
+      "country": "528",
+      "parent": "840",
+      "year": 2025,
+      "period": "2024/25",
+      "currency": "EUR",
+      "revenue": 1300,
+      "profit": 29.6,
+      "taxPaid": 28.3,
+      "employees": 509,
+      "dataType": "berekend",
+      "source": "taxplorer-cisco",
+      "note": "Uit het EU-landenrapport via Taxplorer, omgerekend naar euro. 509 werknemers.",
+      "note_en": "From the EU country-by-country report via Taxplorer, converted to euro. 509 employees."
+    },
+    {
+      "company": "Netflix",
+      "country": "528",
+      "parent": "840",
+      "year": 2023,
+      "currency": "EUR",
+      "revenue": 15800,
+      "taxPaid": 336,
+      "dataType": "officieel",
+      "source": "nos-netflix-2024",
+      "note": "Netflix International B.V. in Amsterdam ontvangt het abonnementsgeld uit heel Europa (en daarbuiten); bijna €14 mld daarvan gaat naar andere Netflix-bedrijven in het buitenland. Winst vóór belasting staat niet in het artikel.",
+      "note_en": "Netflix International B.V. in Amsterdam receives subscription fees from across Europe (and beyond); almost €14 bn of it goes to other Netflix companies abroad. Profit before tax is not given in the article."
+    }
+  ],
+  "context": [
+    {
+      "source": "kst-25087-357",
+      "nl": "Royalty's die via Nederland naar belastingparadijzen gingen, daalden van €32,1 mld in 2019 naar €0,7 mld in 2024 (DNB). Google stopte na 2019 met zijn constructie via Nederland.",
+      "en": "Royalties flowing through the Netherlands to tax havens fell from €32.1 bn in 2019 to €0.7 bn in 2024 (DNB). Google ended its structure via the Netherlands after 2019."
+    },
+    {
+      "source": "cbs-84120",
+      "nl": "De bronbelasting op rente en royalty's naar belastingparadijzen (sinds 2021) bracht €43–129 mln per jaar op. Ter vergelijking: de totale vennootschapsbelasting was €49,9 mld in 2025.",
+      "en": "The withholding tax on interest and royalties to tax havens (since 2021) raised €43–129 m per year. For comparison: total corporate tax was €49.9 bn in 2025."
+    },
+    {
+      "source": "mn-2027",
+      "nl": "De wereldwijde minimumbelasting van 15% (sinds 2024) levert volgens de Miljoenennota 2027 voor het eerst iets op in 2026: geraamd €60 mln.",
+      "en": "The global 15% minimum tax (since 2024) yields revenue for the first time in 2026 according to the 2027 Budget Memorandum: an estimated €60 m."
+    },
+    {
+      "source": "ter-haar-2020",
+      "nl": "Amerikaanse multinationals betaalden in 2017 €2,9 mld van de €25,1 mld vennootschapsbelasting (Commissie Ter Haar).",
+      "en": "US multinationals paid €2.9 bn of the €25.1 bn in corporate tax in 2017 (Ter Haar Committee)."
+    },
+    {
+      "source": "belastingdienst-eb-2025",
+      "nl": "Energiebelasting 2025: een huishouden betaalt €0,10154 per kWh, een zakelijke grootverbruiker (zoals een datacenter) boven 10 mln kWh €0,00321, ruim 30 keer minder.",
+      "en": "Energy tax 2025: a household pays €0.10154 per kWh, a large business consumer (such as a data centre) above 10 m kWh €0.00321, over 30 times less."
+    }
+  ]
+}

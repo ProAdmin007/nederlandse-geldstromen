@@ -1002,3 +1002,35 @@ h3 {
 .tooltip__cmp {
   color: var(--muted);
 }
+
+/* Belasting per concern */
+.tax {
+  margin: 10px 0 14px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+.tax__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4px 0;
+  font-variant-numeric: tabular-nums;
+}
+.tax__table th,
+.tax__table td {
+  padding: 3px 4px;
+  text-align: left;
+  font-weight: 400;
+  vertical-align: top;
+}
+.tax__table thead th {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.tax__table .num {
+  text-align: right;
+}
+.tax__table tr.is-nl th,
+.tax__table tr.is-nl td {
+  font-weight: 600;
+}

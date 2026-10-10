@@ -1,4 +1,4 @@
-import type { Category, Country, DataType, Dataset, Direction, Flow, Lang, Recipient, Sector, Source, Via } from "./types";
+import type { Category, Country, DataType, Dataset, Direction, Flow, Lang, Recipient, Sector, Source, TaxRecord, Via } from "./types";
 
 type Text = { nl: string; en: string };
 
@@ -29,6 +29,8 @@ export interface RawDataset {
     via?: (Omit<Via, "note"> & { category: Category; direction: Direction; note?: Text })[];
   }[];
   recipients: (Omit<Recipient, "note"> & { note?: Text })[];
+  taxes?: (Omit<TaxRecord, "note"> & { note?: Text })[];
+  taxContext?: ({ source: string } & Text)[];
 }
 
 /** Pakt het compacte bestand uit naar het datamodel uit lib/types.ts, in de gekozen taal. */
@@ -74,5 +76,7 @@ export function expandDataset(raw: RawDataset, lang: Lang = "nl"): Dataset {
     sources,
     countries,
     recipients: raw.recipients.map((r) => ({ ...r, name: lang === "en" && r.nameEn ? r.nameEn : r.name, note: text(r.note) })),
+    taxes: (raw.taxes ?? []).map((r) => ({ ...r, note: text(r.note) })),
+    taxContext: (raw.taxContext ?? []).map((c) => ({ source: c.source, text: c[lang] })),
   };
 }

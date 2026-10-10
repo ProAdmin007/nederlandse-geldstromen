@@ -115,6 +115,17 @@ const nl = {
   noteNoReexport:
     "Zonder wederuitvoer: goederen die Nederland alleen doorvoert zijn afgetrokken. Wat overblijft is wat Nederland zelf gebruikt en zelf maakt.",
   noteUltimate: "Uiteindelijke ontvanger: IT-diensten die vanuit Ierland worden gefactureerd zijn voor 90% toegerekend aan de VS (schatting).",
+  noteIntraGroup:
+    "Veel van dit geld blijft binnen hetzelfde concern. Amerikaanse techbedrijven hebben Nederlandse dochters (datacenters, Europese hoofdkantoren); wat die aan hun moederbedrijf leveren of betalen, telt als export of import. Hoeveel er als winst en belasting in Nederland blijft, zie je bij de VS en Ierland onder 'Wat blijft er in Nederland?'.",
+  taxTitle: "Wat blijft er in Nederland?",
+  taxIntro:
+    "Omzet, winst en belasting van grote techbedrijven per land, uit hun eigen openbare landenrapporten. Dit zijn geen geldstromen, maar laat zien hoeveel van de omzet als winst en belasting in Nederland blijft.",
+  taxRevenue: "Omzet",
+  taxProfit: "Winst vóór belasting",
+  taxPaid: "Belasting betaald",
+  taxEmployees: "Werknemers",
+  taxRate: "belasting / winst",
+  taxContextTitle: "Belasting in Nederland: context",
   noteDefense: "Defensie: gerealiseerde betalingen uit de jaarverslagen voor bekende projecten (o.a. F-35, Apache, Chinook, Leopard). Veel posten zijn vertrouwelijk; voor de VS is het verschil met het officiële totaal over 2020–2024 als schatting verdeeld.",
   languageName: "Nederlands",
   switchLanguage: "English",
@@ -234,6 +245,17 @@ const en: Strings = {
   noteNoReexport:
     "Without re-exports: goods the Netherlands only passes on have been subtracted. What remains is what the Netherlands uses and makes itself.",
   noteUltimate: "Ultimate recipient: IT services billed from Ireland are attributed 90% to the US (estimate).",
+  noteIntraGroup:
+    "Much of this money stays within the same group. US tech companies have Dutch subsidiaries (data centres, European headquarters); what they supply to or pay their parent counts as exports or imports. How much remains in the Netherlands as profit and tax is shown for the US and Ireland under 'What stays in the Netherlands?'.",
+  taxTitle: "What stays in the Netherlands?",
+  taxIntro:
+    "Revenue, profit and tax of large tech companies by country, from their own public country-by-country reports. These are not money flows, but show how much of the revenue stays in the Netherlands as profit and tax.",
+  taxRevenue: "Revenue",
+  taxProfit: "Profit before tax",
+  taxPaid: "Tax paid",
+  taxEmployees: "Employees",
+  taxRate: "tax / profit",
+  taxContextTitle: "Tax in the Netherlands: context",
   noteDefense: "Defence: realised payments from the annual reports for known projects (e.g. F-35, Apache, Chinook, Leopard). Many items are confidential; for the US the gap with the official 2020–2024 total is spread as an estimate.",
   languageName: "English",
   switchLanguage: "Nederlands",

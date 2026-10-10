@@ -124,4 +124,30 @@ export interface Dataset {
   sources: Record<string, Source>;
   countries: Country[];
   recipients: Recipient[];
+  taxes: TaxRecord[];
+  /** Korte, officiële contextpunten over belasting (tekst in de gekozen taal). */
+  taxContext: { text: string; source: string }[];
+}
+
+/** Omzet, winst en belasting van een concern in één land (context, geen geldstroom). */
+export interface TaxRecord {
+  company: string;
+  /** Land van de vestiging (ISO numeriek). */
+  country: string;
+  /** Land van het moederbedrijf. */
+  parent: string;
+  /** Jaar waarin het boekjaar eindigt. */
+  year: number;
+  period?: string;
+  currency: "USD" | "EUR";
+  /** Bedragen in miljoenen van `currency`. */
+  revenue?: number;
+  revenueRelated?: number;
+  profit?: number;
+  taxPaid?: number;
+  taxAccrued?: number;
+  employees?: number;
+  dataType: DataType;
+  source: string;
+  note?: string;
 }

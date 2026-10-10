@@ -35,6 +35,7 @@ const T = {
   bbp: await read("data/bronnen/cbs-bbp.json"),
 };
 const schattingen = await read("data/schattingen.json");
+const belasting = await read("data/belasting.json");
 const landen = await read("data/landen.json");
 const world = await read("node_modules/world-atlas/countries-110m.json");
 const extras = [];
@@ -98,6 +99,7 @@ const sources = {
   "cbs-bevolking": cbs(T.bevolking, "Population; key figures"),
   "cbs-bbp": cbs(T.bbp, "GDP, output and expenditure"),
   ...schattingen.sources,
+  ...belasting.sources,
 };
 for (const e of extras) Object.assign(sources, e.sources);
 const sourceKeys = Object.keys(sources);
@@ -457,6 +459,8 @@ const dataset = {
   dict: { directions: DIRECTIONS, sectors: SECTORS, categories: CATEGORIES, dataTypes: DATATYPES, sources: sourceKeys, notes },
   sources,
   countries: out,
+  taxContext: (belasting.context ?? []).map(({ source, nl, en }) => ({ source, ...N(nl, en) })),
+  taxes: belasting.records.map(({ note_en, ...r }) => ({ ...r, note: r.note && N(r.note, note_en ?? r.note) })),
   recipients: (schattingen.recipients ?? []).map(({ note_en, name_en, ...r }) => ({ ...r, nameEn: name_en, note: r.note && N(r.note, note_en ?? r.note) })),
 };
 
