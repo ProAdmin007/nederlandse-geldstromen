@@ -351,3 +351,19 @@ describe("belasting", () => {
     expect(ms.taxPaid).toBeCloseTo(105.5, 0);
   });
 });
+
+describe("controle met de nationale rekeningen", () => {
+  it("het handelssaldo in de app volgt het officiële saldo in elk jaar (zelfde teken, binnen 40%)", () => {
+    const TRANSFERS = ["hulp", "eu", "uitkeringen", "overmakingen"];
+    for (const year of real.meta.years) {
+      const na = real.meta.nationalAccounts![year];
+      const flows = [...resolveAll(real, opts({ year })).values()].flat().filter((f) => !TRANSFERS.includes(f.category));
+      const t = totals(flows);
+      const official = na.exp - na.imp;
+      expect(t.netto / official, String(year)).toBeGreaterThan(0.6);
+      expect(t.netto / official, String(year)).toBeLessThan(1.4);
+      expect(t.in / na.exp, String(year)).toBeGreaterThan(0.7);
+      expect(t.in / na.exp, String(year)).toBeLessThan(1.3);
+    }
+  });
+});

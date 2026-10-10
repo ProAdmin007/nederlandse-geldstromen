@@ -101,7 +101,8 @@ const TABLES = {
   "cbs-bbp": () =>
     table("85879NED", {
       filter: `${yearly} and SoortGegevens eq 'A045297' and Perioden ge '2001JJ00'`,
-      select: "Perioden,BrutoBinnenlandsProduct_2",
+      // Totaal_3 = invoer, Totaal_15 = uitvoer van goederen en diensten (ter controle van het saldo).
+      select: "Perioden,BrutoBinnenlandsProduct_2,Totaal_3,Totaal_15",
       dims: [],
     }),
 };

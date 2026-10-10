@@ -116,12 +116,11 @@
       "year": 2016,
       "currency": "EUR",
       "revenue": 16000,
-      "profit": 12.6,
       "taxPaid": 3,
       "dataType": "officieel",
       "source": "quote-google-2016",
-      "note": "Google Netherlands Holdings B.V., de 'Dutch sandwich': ontving €16 mld aan royalty's (o.a. €12,3 mld van Google Ireland) en sluisde die door naar Bermuda. Over 2012–2019 ging zo €128 mld door Nederland, met ruim €25 mln Nederlandse belasting (0,02%). Google stopte ermee na 2019. Uit de jaarrekening, via Quote en NOS.",
-      "note_en": "Google Netherlands Holdings B.V., the 'Dutch sandwich': received €16 bn in royalties (incl. €12.3 bn from Google Ireland) and passed it on to Bermuda. Over 2012–2019 €128 bn went through the Netherlands this way, with just over €25 m in Dutch tax (0.02%). Google ended the structure after 2019. From the annual accounts, via Quote and NOS."
+      "note": "Google Netherlands Holdings B.V., de 'Dutch sandwich': ontving €16 mld aan royalty's (o.a. €12,3 mld van Google Ireland) en sluisde die door naar Bermuda. Over 2012–2019 ging zo €128 mld door Nederland, met ruim €25 mln Nederlandse belasting (0,02%). Google stopte ermee na 2019. Uit de jaarrekening, via Quote en NOS. Van de €16 mld bleef €12,6 mln in Nederland; de belasting van €3 mln is 0,02% van wat erdoorheen ging.",
+      "note_en": "Google Netherlands Holdings B.V., the 'Dutch sandwich': received €16 bn in royalties (incl. €12.3 bn from Google Ireland) and passed it on to Bermuda. Over 2012–2019 €128 bn went through the Netherlands this way, with just over €25 m in Dutch tax (0.02%). Google ended the structure after 2019. From the annual accounts, via Quote and NOS. Of the €16 bn, €12.6 m stayed in the Netherlands; the €3 m tax is 0.02% of what passed through."
     },
     {
       "company": "Google",

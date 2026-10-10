@@ -116,6 +116,8 @@ export interface Dataset {
     population: Record<string, number>;
     /** Bbp in miljoen euro, werkelijke prijzen. */
     gdp: Record<string, number>;
+    /** Officiële uit- en invoer van goederen en diensten (CBS nationale rekeningen), mln euro. */
+    nationalAccounts?: Record<string, { exp: number; imp: number }>;
     /** Jaren waarin een reeks van methode wisselt; trendlijnen breken daar af. */
     breaks: { year: number; label: string }[];
     notes: string[];

@@ -425,6 +425,12 @@ const dataset = {
     serviceYears,
     population: pick(T.bevolking, "TotaleBevolking_1"),
     gdp: pick(T.bbp, "BrutoBinnenlandsProduct_2"),
+    /** Officiële uit- en invoer van goederen en diensten (nationale rekeningen), ter controle. */
+    nationalAccounts: Object.fromEntries(
+      T.bbp.data
+        .filter((r) => r.Perioden.includes("JJ") && num(r.Totaal_15) && num(r.Totaal_3))
+        .map((r) => [year(r.Perioden), { exp: r.Totaal_15, imp: r.Totaal_3 }]),
+    ),
     /** Jaren waarin een reeks van methode wisselt; de trendlijn breekt daar af. */
     breaks: [
       { year: Math.min(...svc14Years), ...N("Diensten: nieuwe indeling (BPM6)", "Services: new classification (BPM6)") },

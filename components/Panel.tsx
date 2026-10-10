@@ -117,6 +117,15 @@ function FilterNotes({ ctx }: { ctx: Ctx }) {
     const later = data.meta.breaks.filter((b) => b.year > opts.year);
     if (later.length) notes.push(t.noteOldMethod(later.map((b) => `${b.year}: ${b.label}`).join("; ")));
   }
+  // Categorieën die in andere jaren wel data hebben, maar in dit jaar (nog) niet.
+  const missing = CATEGORIES.filter(
+    (c) =>
+      (opts.category === "alles" || opts.category === c) &&
+      data.countries.some((x) => x.flows.some((f) => f.category === c)) &&
+      !data.countries.some((x) => x.flows.some((f) => f.category === c && f.year === opts.year)) &&
+      data.countries.some((x) => x.flows.some((f) => f.category === c && f.year < opts.year)),
+  );
+  if (missing.length) notes.push(t.noteMissing(opts.year, missing.map((c) => CATEGORY_LABELS[ctx.lang][c].toLowerCase()).join(", ")));
   if (opts.sector === "consumenten") notes.push(t.noteConsumers);
   if (opts.sector === "overheid") notes.push(t.noteGovernment);
   if (opts.sector === "bedrijven") notes.push(t.noteBusiness);
@@ -377,6 +386,19 @@ export function TaxSection({ ctx, countryId }: { ctx: Ctx; countryId?: string })
 
 const SHOW = 15;
 
+/** Vergelijking met het officiële saldo uit de nationale rekeningen (alleen zinvol zonder filters). */
+function CrossCheck({ ctx }: { ctx: Ctx }) {
+  const { opts, data, t } = ctx;
+  const na = data.meta.nationalAccounts?.[opts.year];
+  if (!na || opts.sector !== "alles" || opts.category !== "alles" || !opts.reexport) return null;
+  return (
+    <div className="check">
+      <strong>{t.checkTitle}</strong>
+      <p>{t.checkText(opts.year, ctx.fmt(na.exp), ctx.fmt(na.imp), ctx.fmt(na.exp - na.imp, true))}</p>
+    </div>
+  );
+}
+
 export function Overview({ ctx, onSelect }: { ctx: Ctx; onSelect: (id: string) => void }) {
   const [all, setAll] = useState(false);
   const rows = ranked(ctx.data, ctx.resolved);
@@ -394,6 +416,8 @@ export function Overview({ ctx, onSelect }: { ctx: Ctx; onSelect: (id: string) =
         {ctx.compare ? ` ${ctx.t.vs} ${ctx.compare.year}` : ""} · {SECTOR_LABELS[L][ctx.opts.sector]} · {ctx.t.clickHint}
       </p>
       <Stats flows={flows} prev={prevAll} ctx={ctx} />
+      <p className="muted small">{ctx.t.notProfit}</p>
+      <CrossCheck ctx={ctx} />
       <FilterNotes ctx={ctx} />
       <Trend ctx={ctx} />
 

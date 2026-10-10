@@ -1034,3 +1034,32 @@ h3 {
 .tax__table tr.is-nl td {
   font-weight: 600;
 }
+
+/* Controle met de nationale rekeningen */
+.check {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--official);
+  border-radius: 10px;
+  font-size: 0.82rem;
+}
+.check p {
+  margin: 2px 0 0;
+  color: var(--muted);
+}
+.tax__table td.num {
+  white-space: nowrap;
+}
+.tax__table td.num .small {
+  white-space: normal;
+}
+@media (max-width: 520px) {
+  .year input[type="range"] {
+    flex: 1 1 100px;
+  }
+  .year__value {
+    min-width: 0;
+    font-size: 1.2rem;
+  }
+}

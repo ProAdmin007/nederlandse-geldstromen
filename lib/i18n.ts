@@ -115,6 +115,13 @@ const nl = {
   noteNoReexport:
     "Zonder wederuitvoer: goederen die Nederland alleen doorvoert zijn afgetrokken. Wat overblijft is wat Nederland zelf gebruikt en zelf maakt.",
   noteUltimate: "Uiteindelijke ontvanger: IT-diensten die vanuit Ierland worden gefactureerd zijn voor 90% toegerekend aan de VS (schatting).",
+  checkTitle: "Ter controle",
+  checkText: (y: number, exp: string, imp: string, bal: string) =>
+    `Volgens de nationale rekeningen van CBS voerde Nederland in ${y} voor ${exp} uit en voor ${imp} in: een saldo van ${bal}. De handelsstatistiek per land (hierboven) wijkt daar iets van af, omdat de nationale rekeningen goederenhandel anders afbakenen (o.a. doorvoer en transporthandel).`,
+  notProfit:
+    "Een positief saldo is geen winst: er komt meer geld binnen voor verkopen dan er uitgaat voor aankopen. Winst en dividend die naar buitenlandse eigenaren van bedrijven in Nederland gaan, zitten niet in deze cijfers.",
+  noteMissing: (y: number, cats: string) =>
+    `Voor ${y} zijn nog niet alle bronnen gepubliceerd: ${cats} ontbreken nog. Het saldo is daardoor iets te rooskleurig; kies een eerder jaar voor het volledige beeld.`,
   noteIntraGroup:
     "Veel van dit geld blijft binnen hetzelfde concern. Amerikaanse techbedrijven hebben Nederlandse dochters (datacenters, Europese hoofdkantoren); wat die aan hun moederbedrijf leveren of betalen, telt als export of import. Hoeveel er als winst en belasting in Nederland blijft, zie je bij de VS en Ierland onder 'Wat blijft er in Nederland?'.",
   taxTitle: "Wat blijft er in Nederland?",
@@ -245,6 +252,13 @@ const en: Strings = {
   noteNoReexport:
     "Without re-exports: goods the Netherlands only passes on have been subtracted. What remains is what the Netherlands uses and makes itself.",
   noteUltimate: "Ultimate recipient: IT services billed from Ireland are attributed 90% to the US (estimate).",
+  checkTitle: "Cross-check",
+  checkText: (y, exp, imp, bal) =>
+    `According to the CBS national accounts, the Netherlands exported ${exp} and imported ${imp} in ${y}: a balance of ${bal}. The trade statistics by country (above) differ slightly, because the national accounts define trade in goods differently (e.g. transit and merchanting).`,
+  notProfit:
+    "A positive balance is not profit: more money comes in for sales than goes out for purchases. Profits and dividends going to foreign owners of companies in the Netherlands are not included in these figures.",
+  noteMissing: (y, cats) =>
+    `Not all sources have been published for ${y} yet: ${cats} are still missing. The balance is therefore slightly too favourable; choose an earlier year for the full picture.`,
   noteIntraGroup:
     "Much of this money stays within the same group. US tech companies have Dutch subsidiaries (data centres, European headquarters); what they supply to or pay their parent counts as exports or imports. How much remains in the Netherlands as profit and tax is shown for the US and Ireland under 'What stays in the Netherlands?'.",
   taxTitle: "What stays in the Netherlands?",
