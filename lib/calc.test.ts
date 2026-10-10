@@ -309,3 +309,13 @@ describe("verhalen", () => {
     }
   });
 });
+
+describe("overheid", () => {
+  it("heeft elk jaar sinds 2020 bekende uitgaven aan de VS (IT en defensie)", () => {
+    for (const year of [2020, 2021, 2022, 2023, 2024, 2025]) {
+      const flows = resolveAll(real, opts({ year, sector: "overheid" })).get("840")!;
+      expect(totals(flows).uit, String(year)).toBeGreaterThan(100);
+      expect(flows.some((f) => f.category === "it"), String(year)).toBe(true);
+    }
+  });
+});

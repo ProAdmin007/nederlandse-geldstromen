@@ -110,7 +110,7 @@ const nl = {
   noteConsumers:
     "Officieel per land bekend: privé reisverkeer (vakanties). Overmakingen door migranten zijn modelschattingen van de Wereldbank. Wat consumenten aan buitenlandse producten uitgeven, splitst CBS niet uit naar land; dat zit bij bedrijven.",
   noteGovernment:
-    "Overheid: ontwikkelingshulp (OESO), EU-begroting (Europese Commissie), uitkeringen in het buitenland, overheidsdiensten (CBS) en geschatte defensie-aankopen. IT-uitgaven staan bij de ontvangers.",
+    "Overheid: ontwikkelingshulp, EU-begroting, pensioenen in het buitenland, overheidsdiensten en de bekende delen van IT en defensie. CBS splitst handel niet uit naar wie betaalt, dus alle overige overheidsaankopen (cloud, software, licenties) zitten bij bedrijven. Voor IT is alleen bekend: het Rijk bij 8 grote leveranciers (2020–2024) en gemeenten aan Microsoft (2025). Onderwijs, zorg en provincies ontbreken: het werkelijke bedrag is dus hoger.",
   noteBusiness: "CBS splitst handel niet uit naar wie betaalt. Alles wat niet aan overheid of consumenten is toe te rekenen, staat hier.",
   noteNoReexport:
     "Zonder wederuitvoer: goederen die Nederland alleen doorvoert zijn afgetrokken. Wat overblijft is wat Nederland zelf gebruikt en zelf maakt.",
@@ -229,7 +229,7 @@ const en: Strings = {
   noteConsumers:
     "Officially known by country: personal travel (holidays). Migrant remittances are World Bank model estimates. What consumers spend on foreign products is not split by country by CBS; it sits with businesses.",
   noteGovernment:
-    "Government: development aid (OECD), EU budget (European Commission), benefits paid abroad, government services (CBS) and estimated defence purchases. IT spending is shown under recipients.",
+    "Government: development aid, EU budget, pensions paid abroad, government services and the known parts of IT and defence. CBS does not split trade by who pays, so all other government purchases (cloud, software, licences) sit under businesses. For IT only this is known: central government with 8 large suppliers (2020–2024) and municipalities to Microsoft (2025). Education, healthcare and provinces are missing, so the real amount is higher.",
   noteBusiness: "CBS does not split trade by who pays. Everything not attributable to government or consumers is shown here.",
   noteNoReexport:
     "Without re-exports: goods the Netherlands only passes on have been subtracted. What remains is what the Netherlands uses and makes itself.",

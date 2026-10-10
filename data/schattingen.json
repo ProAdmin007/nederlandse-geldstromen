@@ -90,6 +90,64 @@
       "partOf": "goederen",
       "note": "Aanbetaling Leopard 2A8-tanks in 2025 (€211,2 mln). Het jaarverslag noemt de leverancier niet; toegerekend aan Duitsland (fabrikant KNDS Deutschland).",
       "note_en": "Advance payment for Leopard 2A8 tanks in 2025 (€211.2 m). The annual report does not name the supplier; attributed to Germany (manufacturer KNDS Deutschland)."
+    },
+    {
+      "id": "gov-it-rijk",
+      "country": "840",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "amounts": {
+        "2020": 126,
+        "2021": 136,
+        "2022": 168,
+        "2023": 135,
+        "2024": 230
+      },
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "it",
+      "dataType": "schatting",
+      "source": "kamerbrief-slm-2025",
+      "partOf": "it",
+      "note": "Rijksoverheid (ministeries en uitvoeringsorganisaties) bij 8 strategische IT-leveranciers: AWS, Google, IBM, Microsoft, Oracle, Red Hat (VS), SAP (DE) en KPN (NL). Officieel totaalbedrag, hier toegerekend aan de VS omdat 6 van de 8 Amerikaans zijn. Onderwijs, zorg, gemeenten en provincies zitten er niet in. Facturatie loopt deels via Ierland.",
+      "note_en": "Central government (ministries and agencies) with 8 strategic IT suppliers: AWS, Google, IBM, Microsoft, Oracle, Red Hat (US), SAP (DE) and KPN (NL). Official total, attributed to the US here because 6 of the 8 are American. Education, healthcare, municipalities and provinces are not included. Part of the billing runs via Ireland."
+    },
+    {
+      "id": "gov-it-gemeenten",
+      "country": "840",
+      "years": [
+        2025
+      ],
+      "amount": 185,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "it",
+      "dataType": "schatting",
+      "source": "ad-bb-gemeenten-microsoft",
+      "partOf": "it",
+      "note": "Gemeenten aan Microsoft in 2025 (onderzoek AD en Binnenlands Bestuur, 334 van 342 gemeenten). Rijk, onderwijs, zorg en andere leveranciers zitten er niet in: voor 2025 is er nog geen Rijkscijfer.",
+      "note_en": "Municipalities to Microsoft in 2025 (research by AD and Binnenlands Bestuur, 334 of 342 municipalities). Central government, education, healthcare and other suppliers are not included: there is no central government figure for 2025 yet."
+    },
+    {
+      "id": "gov-defensie-2025",
+      "country": "840",
+      "years": [
+        2025
+      ],
+      "amount": 1300,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "schatting",
+      "source": "kamer-defensie-vs",
+      "partOf": "goederen",
+      "note": "Geen cijfer voor 2025: het gemiddelde van 2020–2024 (€6,5 mld in vijf jaar, o.a. F-35) is doorgetrokken. Ruwe schatting.",
+      "note_en": "No figure for 2025: the 2020–2024 average (€6.5 bn over five years, including the F-35) is carried forward. Rough estimate."
     }
   ],
   "via": [
