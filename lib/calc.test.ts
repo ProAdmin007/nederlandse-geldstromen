@@ -202,8 +202,10 @@ describe("echte data", () => {
   ])("NL → %s in 2024 is precies CBS-goederen + CBS-diensten (standaardweergave, zonder schattingen)", (name, id) => {
     const g = cbsRow(cbsGoods, name, (r) => r.Perioden === "2024JJ00" && r.SITC === "T001082");
     const s = cbsRow(cbsServices, name, (r) => r.Perioden === "2024JJ00" && r.Diensten === "T001039");
-    // Alleen CBS-regels: andere bronnen (overmakingen, hulp) komen er los bij.
-    const flows = resolveAll(real, opts({ estimates: false })).get(id)!.filter((f) => f.source.startsWith("cbs-"));
+    // Overdrachten (hulp, EU, uitkeringen, overmakingen) komen er los bij; wat van het CBS-cijfer is
+    // afgetrokken (zoals gerealiseerde defensie-aankopen) telt wel mee, zodat het totaal gelijk blijft.
+    const TRANSFERS = ["hulp", "eu", "uitkeringen", "overmakingen"];
+    const flows = resolveAll(real, opts({ estimates: false })).get(id)!.filter((f) => !TRANSFERS.includes(f.category));
     const t = totals(flows);
     // Afronding per regel op hele miljoenen: kleine afwijking toegestaan.
     expect(t.uit).toBeCloseTo((g.TotaleInvoerwaarde_1 as number) + (s.InvoerVanDiensten_1 as number), -1);
@@ -317,5 +319,19 @@ describe("overheid", () => {
       expect(totals(flows).uit, String(year)).toBeGreaterThan(100);
       expect(flows.some((f) => f.category === "it"), String(year)).toBe(true);
     }
+  });
+});
+
+describe("defensie", () => {
+  it("VS 2020–2024 telt op tot het officiële totaal van ca. €6,5 mld", () => {
+    let sum = 0;
+    for (const year of [2020, 2021, 2022, 2023, 2024])
+      sum += totals(resolveAll(real, opts({ year, category: "defensie" })).get("840")!).uit;
+    expect(sum).toBeCloseTo(6500, -1);
+  });
+
+  it("gerealiseerde betalingen blijven zichtbaar als schattingen uit staan", () => {
+    const flows = resolveAll(real, opts({ year: 2025, category: "defensie", estimates: false })).get("840")!;
+    expect(totals(flows).uit).toBeCloseTo(751.2, 0);
   });
 });

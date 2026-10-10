@@ -104,8 +104,9 @@ Er is geen database en geen backend. `npm run build` maakt een statische site di
 | [Europese Commissie / HIVA](https://hiva.kuleuven.be/nl/onderzoeksmap/thema/verzorgingsstaat/p/Docs/network-statistics-ry-2024/cross-border-pensions-reference-year-2024.pdf) | Wettelijke pensioenen naar en uit EU/EFTA-landen en het VK (2024) |
 | [Eurostat fats_activ](https://ec.europa.eu/eurostat/databrowser/view/fats_activ/default/table) | Onderbouwing van de toerekening Ierland → VS |
 
-Schattingen komen uit Kamerstukken (defensie-aankopen), de Kamerbrief over SLM Rijk (IT-leveranciers) en
-journalistiek onderzoek (gemeenten en Microsoft). Ze staan allemaal in
+Defensie-uitgaven komen uit de F-35-voortgangsrapportages en de jaarverslagen van het Defensiematerieelbegrotingsfonds
+(gerealiseerde betalingen per project). IT-uitgaven van de publieke sector komen uit de Kamerbrief over SLM Rijk,
+de jaarverslagen van SURF en journalistiek onderzoek (gemeenten en Microsoft). Ze staan allemaal in
 [`data/schattingen.json`](data/schattingen.json).
 
 ### Methode
@@ -124,6 +125,8 @@ journalistiek onderzoek (gemeenten en Microsoft). Ze staan allemaal in
   - Overmakingen in de statistiek (~€1 mld) zijn veel lager dan de Wereldbank-schatting (USD 7,8 mld).
   - SVB publiceert geen uitkeringen per land; pensioenen zijn er alleen voor Europa en voor 2024.
   - Voor Amazon via Luxemburg bestaat geen cijfer over het Amerikaanse deel; daarom is er geen toerekening.
+  - Overheids-IT is alleen deels bekend (Rijk, SURF, gemeenten); zorg, scholen, provincies en waterschappen
+    ontbreken. Veel defensieposten zijn vertrouwelijk.
 - **Bewust weggelaten:** inkomens uit beleggingen (vertekend door brievenbusfirma's) en landen met minder dan
   €1 mld handel per jaar, tenzij er andere geldstromen van minstens €25 mln zijn.
 

@@ -35,28 +35,27 @@
       "nameEn": "Foreign affiliates by country of control (fats_activ): Ireland, IT and information services (J62–J63), 2023",
       "publisher": "Eurostat",
       "url": "https://ec.europa.eu/eurostat/databrowser/view/fats_activ/default/table"
+    },
+    "surf-jaarverslag": {
+      "name": "Jaarverslagen Coöperatie SURF U.A. 2022, 2024 en 2025: omzet softwarelicenties (exclusief btw)",
+      "nameEn": "SURF cooperative annual reports 2022, 2024 and 2025: software licence revenue (excluding VAT)",
+      "publisher": "SURF",
+      "url": "https://www.surf.nl/files/2026-06/jaarverslag_2025_cooperatie_surf_u.a.pdf"
+    },
+    "f35-voortgang": {
+      "name": "Jaarlijkse voortgangsrapportages en financiële verantwoordingen Project Verwerving F-35 (Kamerstukken 26488)",
+      "nameEn": "Annual progress reports and financial statements, F-35 Acquisition Project (parliamentary papers 26488)",
+      "publisher": "Ministerie van Defensie / Tweede Kamer",
+      "url": "https://zoek.officielebekendmakingen.nl/kst-26488-460.html"
+    },
+    "dmf-jaarverslagen": {
+      "name": "Jaarverslagen Defensiematerieelbegrotingsfonds 2021–2025: gerealiseerde uitgaven per project",
+      "nameEn": "Annual reports of the Defence Materiel Budget Fund 2021–2025: realised spending per project",
+      "publisher": "Ministerie van Defensie / Rijksfinanciën",
+      "url": "https://www.rijksoverheid.nl/site/binaries/site-content/collections/documents/2026/05/20/defensiematerieelbegrotingsfonds-2025/defensiematerieelbegrotingsfonds-jaarverslag-2025.pdf"
     }
   },
   "flows": [
-    {
-      "country": "840",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "direction": "uit",
-      "sector": "overheid",
-      "category": "defensie",
-      "amount": 1300,
-      "dataType": "schatting",
-      "source": "kamer-defensie-vs",
-      "partOf": "goederen",
-      "note": "Defensie besteedde 2020–2024 ca. €6,5 mld aan materieel van Amerikaanse leveranciers (o.a. F-35). Jaarbedragen zijn vertrouwelijk; hier gelijk verdeeld (€1,3 mld per jaar).",
-      "note_en": "Defence spent about €6.5 bn on materiel from US suppliers in 2020–2024 (including the F-35). Annual amounts are confidential; spread evenly here (€1.3 bn per year)."
-    },
     {
       "country": "376",
       "years": [
@@ -75,21 +74,6 @@
       "partOf": "goederen",
       "note": "Defensie besteedde 2020–2024 ca. €430 mln aan materieel van Israëlische leveranciers. Jaarbedragen zijn vertrouwelijk; hier gelijk verdeeld.",
       "note_en": "Defence spent about €430 m on materiel from Israeli suppliers in 2020–2024. Annual amounts are confidential; spread evenly here."
-    },
-    {
-      "country": "276",
-      "years": [
-        2025
-      ],
-      "direction": "uit",
-      "sector": "overheid",
-      "category": "defensie",
-      "amount": 211,
-      "dataType": "schatting",
-      "source": "dmf-jaarverslag-2025",
-      "partOf": "goederen",
-      "note": "Aanbetaling Leopard 2A8-tanks in 2025 (€211,2 mln). Het jaarverslag noemt de leverancier niet; toegerekend aan Duitsland (fabrikant KNDS Deutschland).",
-      "note_en": "Advance payment for Leopard 2A8 tanks in 2025 (€211.2 m). The annual report does not name the supplier; attributed to Germany (manufacturer KNDS Deutschland)."
     },
     {
       "id": "gov-it-rijk",
@@ -134,20 +118,338 @@
       "note_en": "Municipalities to Microsoft in 2025 (research by AD and Binnenlands Bestuur, 334 of 342 municipalities). Central government, education, healthcare and other suppliers are not included: there is no central government figure for 2025 yet."
     },
     {
-      "id": "gov-defensie-2025",
+      "id": "gov-it-surf",
+      "country": "840",
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "amounts": {
+        "2021": 65.1,
+        "2022": 84.7,
+        "2023": 73.8,
+        "2024": 90.4,
+        "2025": 92.4
+      },
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "it",
+      "dataType": "schatting",
+      "source": "surf-jaarverslag",
+      "partOf": "it",
+      "note": "Softwarelicenties die SURF inkoopt voor hogescholen, universiteiten en mbo (o.a. Microsoft). Officieel bedrag uit het gecontroleerde jaarverslag, exclusief btw. SURF splitst niet uit per leverancier; toegerekend aan de VS omdat de grootste leveranciers Amerikaans zijn, maar er zitten ook andere in.",
+      "note_en": "Software licences SURF buys for universities, universities of applied sciences and vocational colleges (including Microsoft). Official amount from the audited annual report, excluding VAT. SURF does not split by supplier; attributed to the US because the largest suppliers are American, but others are included."
+    },
+    {
+      "id": "def-us-2015",
+      "country": "840",
+      "years": [
+        2015
+      ],
+      "amount": 34.5,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "f35-voortgang",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 34,5. F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid. Vertrouwelijke posten (zoals munitie en Patriot) ontbreken: dit is een minimum.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 34.5. F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office. Confidential items (such as ammunition and Patriot) are missing: this is a minimum."
+    },
+    {
+      "id": "def-us-2016",
+      "country": "840",
+      "years": [
+        2016
+      ],
+      "amount": 95.9,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "f35-voortgang",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 95,9. F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid. Vertrouwelijke posten (zoals munitie en Patriot) ontbreken: dit is een minimum.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 95.9. F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office. Confidential items (such as ammunition and Patriot) are missing: this is a minimum."
+    },
+    {
+      "id": "def-us-2017",
+      "country": "840",
+      "years": [
+        2017
+      ],
+      "amount": 199,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "f35-voortgang",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 ca. 199 (afgeleid uit cumulatieven). F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid. Vertrouwelijke posten (zoals munitie en Patriot) ontbreken: dit is een minimum.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 approx. 199 (derived from cumulative totals). F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office. Confidential items (such as ammunition and Patriot) are missing: this is a minimum."
+    },
+    {
+      "id": "def-us-2018",
+      "country": "840",
+      "years": [
+        2018
+      ],
+      "amount": 442.3,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "f35-voortgang",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 442,3. F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid. Vertrouwelijke posten (zoals munitie en Patriot) ontbreken: dit is een minimum.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 442.3. F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office. Confidential items (such as ammunition and Patriot) are missing: this is a minimum."
+    },
+    {
+      "id": "def-us-2019",
+      "country": "840",
+      "years": [
+        2019
+      ],
+      "amount": 835.3,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "f35-voortgang",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 835,3. F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid. Vertrouwelijke posten (zoals munitie en Patriot) ontbreken: dit is een minimum.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 835.3. F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office. Confidential items (such as ammunition and Patriot) are missing: this is a minimum."
+    },
+    {
+      "id": "def-us-2020",
+      "country": "840",
+      "years": [
+        2020
+      ],
+      "amount": 807.9,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "f35-voortgang",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 807,9. F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 807.9. F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office."
+    },
+    {
+      "id": "def-us-2021",
+      "country": "840",
+      "years": [
+        2021
+      ],
+      "amount": 937.7,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 699,4; Apache 43,6; Chinook 133,2; Patriot levensduur 25,2; MQ-9 36,3. F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 699.4; Apache 43.6; Chinook 133.2; Patriot life extension 25.2; MQ-9 36.3. F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office."
+    },
+    {
+      "id": "def-us-2022",
+      "country": "840",
+      "years": [
+        2022
+      ],
+      "amount": 921.9,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 ca. 711,5; Apache ca. 116,1; Chinook ca. 94,3 (deels afgeleid uit cumulatieven). F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 approx. 711.5; Apache approx. 116.1; Chinook approx. 94.3 (partly derived from cumulative totals). F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office."
+    },
+    {
+      "id": "def-us-2023",
+      "country": "840",
+      "years": [
+        2023
+      ],
+      "amount": 778.6,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 631,1; Apache 132,0; Chinook ca. 15,5 (onzeker). F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 631.1; Apache 132.0; Chinook approx. 15.5 (uncertain). F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office."
+    },
+    {
+      "id": "def-us-2024",
+      "country": "840",
+      "years": [
+        2024
+      ],
+      "amount": 833.5,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 554,9; Apache 196,1; Chinook 0,5; Patriot PAC-3 82,0. F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 554.9; Apache 196.1; Chinook 0.5; Patriot PAC-3 82.0. F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office."
+    },
+    {
+      "id": "def-us-2025",
       "country": "840",
       "years": [
         2025
       ],
-      "amount": 1300,
+      "amount": 751.2,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "berekend",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Gerealiseerde betalingen aan bekende Amerikaanse defensieprojecten (mln): F-35 494,6; doorontwikkeling F-35 102,0; Apache 137,9; Chinook 16,7. F-35-bedragen zijn inclusief btw en Nederlandse kosten; het grootste deel gaat via het F-35-programmabureau naar de Amerikaanse overheid. Vertrouwelijke posten (zoals munitie en Patriot) ontbreken: dit is een minimum.",
+      "note_en": "Realised payments for known US defence projects (m): F-35 494.6; further development F-35 102.0; Apache 137.9; Chinook 16.7. F-35 amounts include VAT and Dutch costs; most of it goes to the US government via the F-35 programme office. Confidential items (such as ammunition and Patriot) are missing: this is a minimum."
+    },
+    {
+      "id": "def-us-rest",
+      "country": "840",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "amount": 444.1,
       "direction": "uit",
       "sector": "overheid",
       "category": "defensie",
       "dataType": "schatting",
       "source": "kamer-defensie-vs",
       "partOf": "goederen",
-      "note": "Geen cijfer voor 2025: het gemiddelde van 2020–2024 (€6,5 mld in vijf jaar, o.a. F-35) is doorgetrokken. Ruwe schatting.",
-      "note_en": "No figure for 2025: the 2020–2024 average (€6.5 bn over five years, including the F-35) is carried forward. Rough estimate."
+      "note": "Overige Amerikaanse defensie-aankopen (vertrouwelijk, o.a. munitie en Patriot): het officiële totaal van ca. €6,5 mld over 2020–2024 minus de bekende projecten (€4280 mln), gelijk verdeeld over de jaren.",
+      "note_en": "Other US defence purchases (confidential, e.g. ammunition and Patriot): the official total of about €6.5 bn for 2020–2024 minus the known projects (€4280 m), spread evenly over the years."
+    },
+    {
+      "id": "def-de-2025",
+      "country": "276",
+      "years": [
+        2025
+      ],
+      "amount": 397.8,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "schatting",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Gerealiseerd in 2025: aanbetaling Leopard 2A8-tanks 211,2 (KNDS), Skyranger-luchtverdediging 143,5 (Rheinmetall, leverancier afgeleid), Fennek-modernisering 43,1 (KNDS Deutschland).",
+      "note_en": "Realised in 2025: Leopard 2A8 tank advance 211.2 (KNDS), Skyranger air defence 143.5 (Rheinmetall, supplier inferred), Fennek upgrade 43.1 (KNDS Deutschland)."
+    },
+    {
+      "id": "def-no-2024",
+      "country": "578",
+      "years": [
+        2024
+      ],
+      "amount": 211.1,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "schatting",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Aanbetaling luchtverdediging (NASAMS/NOMADS, Kongsberg) in 2024. Betalingen in 2025 zijn vertrouwelijk.",
+      "note_en": "Advance payment for air defence (NASAMS/NOMADS, Kongsberg) in 2024. Payments in 2025 are confidential."
+    },
+    {
+      "id": "def-se-2024",
+      "country": "752",
+      "years": [
+        2024
+      ],
+      "amount": 41,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "schatting",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Modernisering CV90-pantservoertuigen, gerealiseerd 2024. Het jaarverslag noemt de leverancier niet; vermoedelijk BAE Systems Hägglunds (Zweden).",
+      "note_en": "CV90 armoured vehicle upgrade, realised 2024. The annual report does not name the supplier; presumably BAE Systems Hägglunds (Sweden)."
+    },
+    {
+      "id": "def-se-2025",
+      "country": "752",
+      "years": [
+        2025
+      ],
+      "amount": 77.2,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "schatting",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Modernisering CV90-pantservoertuigen, gerealiseerd 2025. Vermoedelijk BAE Systems Hägglunds (Zweden).",
+      "note_en": "CV90 armoured vehicle upgrade, realised 2025. Presumably BAE Systems Hägglunds (Sweden)."
+    },
+    {
+      "id": "def-fr-2024",
+      "country": "250",
+      "years": [
+        2024
+      ],
+      "amount": 134.2,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "schatting",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Aanbetaling H225M Caracal-helikopters (Airbus Helicopters, Frankrijk) in 2024.",
+      "note_en": "Advance payment for H225M Caracal helicopters (Airbus Helicopters, France) in 2024."
+    },
+    {
+      "id": "def-fr-2025",
+      "country": "250",
+      "years": [
+        2025
+      ],
+      "amount": 230,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "schatting",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "Nieuwe mijnenbestrijdingsvaartuigen, gerealiseerd 2025. Gezamenlijk project met België; de bouwer (Naval Group/ECA) is Frans, dus toegerekend aan Frankrijk.",
+      "note_en": "New mine countermeasure vessels, realised 2025. Joint project with Belgium; the builder (Naval Group/ECA) is French, so attributed to France."
+    },
+    {
+      "id": "def-br-2025",
+      "country": "076",
+      "years": [
+        2025
+      ],
+      "amount": 115.7,
+      "direction": "uit",
+      "sector": "overheid",
+      "category": "defensie",
+      "dataType": "schatting",
+      "source": "dmf-jaarverslagen",
+      "partOf": "goederen",
+      "note": "C-390-transportvliegtuigen (Embraer, Brazilië), gerealiseerd 2025.",
+      "note_en": "C-390 transport aircraft (Embraer, Brazil), realised 2025."
     }
   ],
   "via": [

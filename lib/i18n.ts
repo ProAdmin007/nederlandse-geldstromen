@@ -110,12 +110,12 @@ const nl = {
   noteConsumers:
     "Officieel per land bekend: privé reisverkeer (vakanties). Overmakingen door migranten zijn modelschattingen van de Wereldbank. Wat consumenten aan buitenlandse producten uitgeven, splitst CBS niet uit naar land; dat zit bij bedrijven.",
   noteGovernment:
-    "Overheid: ontwikkelingshulp, EU-begroting, pensioenen in het buitenland, overheidsdiensten en de bekende delen van IT en defensie. CBS splitst handel niet uit naar wie betaalt, dus alle overige overheidsaankopen (cloud, software, licenties) zitten bij bedrijven. Voor IT is alleen bekend: het Rijk bij 8 grote leveranciers (2020–2024) en gemeenten aan Microsoft (2025). Onderwijs, zorg en provincies ontbreken: het werkelijke bedrag is dus hoger.",
+    "Overheid: ontwikkelingshulp, EU-begroting, pensioenen in het buitenland, overheidsdiensten en de bekende delen van IT en defensie. CBS splitst handel niet uit naar wie betaalt, dus alle overige overheidsaankopen (cloud, software, licenties) zitten bij bedrijven. Voor IT is alleen bekend: het Rijk bij 8 grote leveranciers (2020–2024), softwarelicenties via SURF voor hoger onderwijs en mbo (2021–2025) en gemeenten aan Microsoft (2025). Zorg, scholen, provincies en waterschappen ontbreken: het werkelijke bedrag is dus hoger.",
   noteBusiness: "CBS splitst handel niet uit naar wie betaalt. Alles wat niet aan overheid of consumenten is toe te rekenen, staat hier.",
   noteNoReexport:
     "Zonder wederuitvoer: goederen die Nederland alleen doorvoert zijn afgetrokken. Wat overblijft is wat Nederland zelf gebruikt en zelf maakt.",
   noteUltimate: "Uiteindelijke ontvanger: IT-diensten die vanuit Ierland worden gefactureerd zijn voor 90% toegerekend aan de VS (schatting).",
-  noteDefense: "Defensie-aankopen zijn schattingen: jaarbedragen per land zijn vertrouwelijk.",
+  noteDefense: "Defensie: gerealiseerde betalingen uit de jaarverslagen voor bekende projecten (o.a. F-35, Apache, Chinook, Leopard). Veel posten zijn vertrouwelijk; voor de VS is het verschil met het officiële totaal over 2020–2024 als schatting verdeeld.",
   languageName: "Nederlands",
   switchLanguage: "English",
   switchLanguageAria: "Switch to English",
@@ -229,12 +229,12 @@ const en: Strings = {
   noteConsumers:
     "Officially known by country: personal travel (holidays). Migrant remittances are World Bank model estimates. What consumers spend on foreign products is not split by country by CBS; it sits with businesses.",
   noteGovernment:
-    "Government: development aid, EU budget, pensions paid abroad, government services and the known parts of IT and defence. CBS does not split trade by who pays, so all other government purchases (cloud, software, licences) sit under businesses. For IT only this is known: central government with 8 large suppliers (2020–2024) and municipalities to Microsoft (2025). Education, healthcare and provinces are missing, so the real amount is higher.",
+    "Government: development aid, EU budget, pensions paid abroad, government services and the known parts of IT and defence. CBS does not split trade by who pays, so all other government purchases (cloud, software, licences) sit under businesses. For IT only this is known: central government with 8 large suppliers (2020–2024), software licences via SURF for higher and vocational education (2021–2025) and municipalities to Microsoft (2025). Healthcare, schools, provinces and water boards are missing, so the real amount is higher.",
   noteBusiness: "CBS does not split trade by who pays. Everything not attributable to government or consumers is shown here.",
   noteNoReexport:
     "Without re-exports: goods the Netherlands only passes on have been subtracted. What remains is what the Netherlands uses and makes itself.",
   noteUltimate: "Ultimate recipient: IT services billed from Ireland are attributed 90% to the US (estimate).",
-  noteDefense: "Defence purchases are estimates: annual amounts per country are confidential.",
+  noteDefense: "Defence: realised payments from the annual reports for known projects (e.g. F-35, Apache, Chinook, Leopard). Many items are confidential; for the US the gap with the official 2020–2024 total is spread as an estimate.",
   languageName: "English",
   switchLanguage: "Nederlands",
   switchLanguageAria: "Schakel naar Nederlands",
