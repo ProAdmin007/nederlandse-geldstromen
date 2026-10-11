@@ -25,6 +25,7 @@ const COLORS: Record<Category, string> = {
   eu: "#2f6fb0",
   uitkeringen: "#ff9da7",
   overmakingen: "#f28e2b",
+  winst: "#6b6ecf",
 };
 
 interface NodeDatum {

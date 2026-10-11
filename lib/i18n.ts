@@ -130,9 +130,13 @@ const nl = {
   noteUltimate: "Uiteindelijke ontvanger: IT-diensten die vanuit Ierland worden gefactureerd zijn voor 90% toegerekend aan de VS (schatting).",
   checkTitle: "Ter controle",
   checkText: (y: number, exp: string, imp: string, bal: string) =>
-    `Volgens de nationale rekeningen van CBS voerde Nederland in ${y} voor ${exp} uit en voor ${imp} in: een saldo van ${bal}. De handelsstatistiek per land (hierboven) wijkt daar iets van af, omdat de nationale rekeningen goederenhandel anders afbakenen (o.a. doorvoer en transporthandel).`,
+    `Volgens de nationale rekeningen van CBS voerde Nederland in ${y} voor ${exp} aan goederen en diensten uit en voor ${imp} in: een saldo van ${bal}. De handelsstatistiek per land (hierboven) wijkt daar iets van af, omdat de nationale rekeningen goederenhandel anders afbakenen (o.a. doorvoer en transporthandel).`,
+  checkWinst: (y: number, out: string, inn: string, missOut: string, missIn: string) =>
+    `Wereldwijd (Eurostat, zonder brievenbusfirma's) ging er in ${y} ${out} naar buitenlandse eigenaren en kwam er ${inn} naar Nederlandse eigenaren. Niet alles is per land gepubliceerd: ${missOut} uitgaand en ${missIn} inkomend staat alleen als regio (zoals offshore-centra) of is vertrouwelijk.`,
   notProfit:
-    "Een positief saldo is geen winst: er komt meer geld binnen voor verkopen dan er uitgaat voor aankopen. Winst en dividend die naar buitenlandse eigenaren van bedrijven in Nederland gaan, zitten niet in deze cijfers.",
+    "Een positief saldo is geen winst: er komt meer geld binnen voor verkopen dan er uitgaat voor aankopen. Hoeveel winst er naar buitenlandse eigenaren gaat (en terugkomt), zie je in de categorie 'Winst en rente op investeringen'.",
+  noteWinst:
+    "Winst en rente op investeringen: wat buitenlandse eigenaren verdienen aan hun bedrijven in Nederland (NL → land) en wat Nederlandse eigenaren verdienen aan hun bedrijven in het buitenland (land → NL). Brievenbusfirma's zijn eruit gehaald. Een deel is herbelegde winst: die blijft in het bedrijf, maar komt de eigenaar wel toe. Cijfers 2014–2024; verliezen zijn weggelaten.",
   noteMissing: (y: number, cats: string) =>
     `Voor ${y} zijn nog niet alle bronnen gepubliceerd: ${cats} ontbreken nog. Het saldo is daardoor iets te rooskleurig; kies een eerder jaar voor het volledige beeld.`,
   noteIntraGroup:
@@ -280,9 +284,13 @@ const en: Strings = {
   noteUltimate: "Ultimate recipient: IT services billed from Ireland are attributed 90% to the US (estimate).",
   checkTitle: "Cross-check",
   checkText: (y, exp, imp, bal) =>
-    `According to the CBS national accounts, the Netherlands exported ${exp} and imported ${imp} in ${y}: a balance of ${bal}. The trade statistics by country (above) differ slightly, because the national accounts define trade in goods differently (e.g. transit and merchanting).`,
+    `According to the CBS national accounts, the Netherlands exported ${exp} and imported ${imp} in goods and services in ${y}: a balance of ${bal}. The trade statistics by country (above) differ slightly, because the national accounts define trade in goods differently (e.g. transit and merchanting).`,
+  checkWinst: (y, out, inn, missOut, missIn) =>
+    `Worldwide (Eurostat, excluding special purpose entities), ${out} went to foreign owners and ${inn} came to Dutch owners in ${y}. Not everything is published by country: ${missOut} outgoing and ${missIn} incoming only appears as a region (such as offshore centres) or is confidential.`,
   notProfit:
-    "A positive balance is not profit: more money comes in for sales than goes out for purchases. Profits and dividends going to foreign owners of companies in the Netherlands are not included in these figures.",
+    "A positive balance is not profit: more money comes in for sales than goes out for purchases. How much profit goes to foreign owners (and comes back) is shown in the category 'Investment income'.",
+  noteWinst:
+    "Investment income: what foreign owners earn on their companies in the Netherlands (NL → country) and what Dutch owners earn on their companies abroad (country → NL). Special purpose entities have been removed. Part of it is reinvested earnings: they stay in the company but accrue to the owner. Figures 2014–2024; losses are left out.",
   noteMissing: (y, cats) =>
     `Not all sources have been published for ${y} yet: ${cats} are still missing. The balance is therefore slightly too favourable; choose an earlier year for the full picture.`,
   noteIntraGroup:
@@ -322,6 +330,7 @@ export const CATEGORY_LABELS: Record<Lang, Record<CategoryFilter, string>> = {
     eu: "EU-begroting",
     uitkeringen: "Uitkeringen en pensioenen",
     overmakingen: "Overmakingen door migranten",
+    winst: "Winst en rente op investeringen",
   },
   en: {
     alles: "All categories",
@@ -335,6 +344,7 @@ export const CATEGORY_LABELS: Record<Lang, Record<CategoryFilter, string>> = {
     eu: "EU budget",
     uitkeringen: "Benefits and pensions",
     overmakingen: "Migrant remittances",
+    winst: "Investment income",
   },
 };
 

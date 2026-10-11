@@ -383,7 +383,104 @@ async function uitkeringen() {
   };
 }
 
-const SERIES = { hulp, overmakingen, eu, uitkeringen };
+// ---- Winst en rente op directe investeringen --------------------------------------------
+// Eurostat bop_fdi6_inc (betalingsbalans van DNB): netto inkomen uit directe investeringen
+// (dividend, herbelegde winst, rente) per partnerland, totaal en het deel van brievenbusfirma's (SPE).
+// Wij tonen totaal min SPE. Is het SPE-deel vertrouwelijk, dan passen we het SPE-aandeel uit de
+// omliggende jaren toe (schatting).
+async function winst() {
+  const url =
+    "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/bop_fdi6_inc?geo=NL&currency=MIO_EUR&nace_r2=TOTAL&fdi_item=DI__D4P__D__F&fdi_item=DO__D4P__D__F&stk_flow=II&stk_flow=IO&format=JSON&lang=en";
+  const data = jsonStat(await get(url, "json"));
+  const val = new Map(data.map((r) => [`${r.partner}|${r.stk_flow}|${r.entity}|${r.time}`, r.value]));
+  const years = [...new Set(data.map((r) => Number(r.time)))].sort();
+  const rows = [];
+  for (const r of data) {
+    if (r.entity !== "TOTAL") continue;
+    // China staat er als "China zonder Hongkong" in.
+    const a2 = { UK: "GB", EL: "GR", CN_X_HK: "CN" }[r.partner] ?? r.partner;
+    const id = a2.length === 2 ? iso.alpha2ToNumeric(a2) : null;
+    const year = Number(r.time);
+    if (!id || year < 2014) continue; // het SPE-deel wordt pas vanaf 2014 gepubliceerd
+    const total = r.value;
+    let spe = val.get(`${r.partner}|${r.stk_flow}|SPE|${r.time}`);
+    let dataType = "berekend";
+    let estimatedShare = null;
+    if (spe == null) {
+      // SPE-aandeel uit het dichtstbijzijnde eerdere en latere jaar met data.
+      const share = (y) => {
+        const t = val.get(`${r.partner}|${r.stk_flow}|TOTAL|${y}`);
+        const s = val.get(`${r.partner}|${r.stk_flow}|SPE|${y}`);
+        return t && s != null && t > 0 ? s / t : null;
+      };
+      const before = years.filter((y) => y < year && y >= 2014).reverse().map(share).find((x) => x != null);
+      const after = years.filter((y) => y > year).map(share).find((x) => x != null);
+      const known = [before, after].filter((x) => x != null);
+      if (!known.length) continue;
+      estimatedShare = Math.min(1, Math.max(0, known.reduce((a, b) => a + b, 0) / known.length));
+      spe = total * estimatedShare;
+      dataType = "schatting";
+    }
+    const amount = total - spe;
+    if (!(amount > 0)) continue; // verliezen (negatief inkomen) tonen we niet als geldstroom
+    const outward = r.stk_flow === "IO"; // inkomen van Nederland uit investeringen in het buitenland
+    const est =
+      estimatedShare != null
+        ? N(
+            ` Het deel van brievenbusfirma's is vertrouwelijk; geschat op ${Math.round(estimatedShare * 100)}% (omliggende jaren).`,
+            ` The SPE share is confidential; estimated at ${Math.round(estimatedShare * 100)}% (adjacent years).`,
+          )
+        : N("", "");
+    rows.push({
+      country: id,
+      year,
+      direction: outward ? "in" : "uit",
+      sector: "bedrijven",
+      category: "winst",
+      amount,
+      dataType,
+      source: "eurostat-fdi-inc",
+      note: outward
+        ? N(
+            `Winst, dividend en rente die Nederlandse eigenaren verdienen aan hun bedrijven in dit land, zonder brievenbusfirma's.${est.nl}`,
+            `Profit, dividends and interest Dutch owners earn on their companies in this country, excluding special purpose entities.${est.en}`,
+          )
+        : N(
+            `Winst, dividend en rente die eigenaren uit dit land verdienen aan hun bedrijven in Nederland, zonder brievenbusfirma's.${est.nl}`,
+            `Profit, dividends and interest owners from this country earn on their companies in the Netherlands, excluding special purpose entities.${est.en}`,
+          ),
+    });
+  }
+  // Wereldtotalen zonder brievenbusfirma's, ter controle: niet alles is per land gepubliceerd.
+  const world = {};
+  for (const y of years) {
+    const w = (f) => {
+      const t = val.get(`WRL_REST|${f}|TOTAL|${y}`);
+      const s = val.get(`WRL_REST|${f}|SPE|${y}`);
+      return t != null && s != null ? Math.round(t - s) : null;
+    };
+    if (y >= 2014 && w("II") != null && w("IO") != null) world[y] = { out: w("II"), in: w("IO") };
+  }
+  return {
+    key: "winst",
+    world,
+    sources: {
+      "eurostat-fdi-inc": {
+        name: "Inkomen uit directe investeringen naar partnerland (bop_fdi6_inc), betalingsbalans DNB; totaal minus bijzondere financiële instellingen",
+        nameEn: "Direct investment income by partner country (bop_fdi6_inc), DNB balance of payments; total minus special purpose entities",
+        publisher: "Eurostat",
+        url: "https://ec.europa.eu/eurostat/databrowser/view/bop_fdi6_inc/default/table",
+      },
+    },
+    meta: N(
+      "Winst en rente op investeringen: inkomen uit directe investeringen (dividend, herbelegde winst en rente binnen concerns), Eurostat/DNB, 2014–2024, zonder brievenbusfirma's. Herbelegde winst is winst die in het bedrijf blijft maar wel aan de eigenaar toekomt; het is dus niet allemaal geld dat de grens over gaat. Verliezen zijn weggelaten. Inkomen uit beleggingen in aandelen en obligaties (geen zeggenschap) zit er niet in.",
+      "Investment income: income on direct investment (dividends, reinvested earnings and intra-group interest), Eurostat/DNB, 2014–2024, excluding special purpose entities. Reinvested earnings stay in the company but accrue to the owner, so not all of it crosses the border. Losses are left out. Income on portfolio investment (shares and bonds without control) is not included.",
+    ),
+    rows,
+  };
+}
+
+const SERIES = { hulp, overmakingen, eu, uitkeringen, winst };
 const only = process.argv.slice(2);
 
 await mkdir(OUT, { recursive: true });

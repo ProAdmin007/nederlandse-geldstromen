@@ -21,7 +21,8 @@ export type Category =
   | "hulp" // ontwikkelingshulp
   | "eu" // EU-begroting: afdrachten en EU-uitgaven in Nederland
   | "uitkeringen" // AOW e.d. betaald aan mensen in het buitenland
-  | "overmakingen"; // geld dat migranten naar familie sturen
+  | "overmakingen" // geld dat migranten naar familie sturen
+  | "winst"; // winst, dividend en rente op directe investeringen
 
 /**
  * officieel  = direct overgenomen uit een officiële statistiek
@@ -118,6 +119,8 @@ export interface Dataset {
     gdp: Record<string, number>;
     /** Officiële uit- en invoer van goederen en diensten (CBS nationale rekeningen), mln euro. */
     nationalAccounts?: Record<string, { exp: number; imp: number }>;
+    /** Wereldtotalen inkomen uit directe investeringen zonder brievenbusfirma's (mln euro). */
+    investmentWorld?: Record<string, { out: number; in: number }>;
     /** Jaren waarin een reeks van methode wisselt; trendlijnen breken daar af. */
     breaks: { year: number; label: string }[];
     notes: string[];

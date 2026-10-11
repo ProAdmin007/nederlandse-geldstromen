@@ -16,6 +16,7 @@ export const CATEGORIES: Category[] = [
   "eu",
   "uitkeringen",
   "overmakingen",
+  "winst",
 ];
 
 const DATA_URL = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/data/geldstromen.json`;

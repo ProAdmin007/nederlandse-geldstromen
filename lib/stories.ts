@@ -71,6 +71,16 @@ export const STORIES: Story[] = [
     needs: "eu",
   },
   {
+    id: "winst",
+    title: { nl: "Waar gaat de winst heen?", en: "Where do the profits go?" },
+    text: {
+      nl: "Wat buitenlandse eigenaren verdienen aan hun bedrijven in Nederland, en wat Nederlandse bedrijven in het buitenland verdienen. Zonder brievenbusfirma's.",
+      en: "What foreign owners earn on their companies in the Netherlands, and what Dutch companies earn abroad. Excluding special purpose entities.",
+    },
+    state: { year: 2024, category: "winst" },
+    needs: "winst",
+  },
+  {
     id: "vakantie",
     title: { nl: "Waar gaat het vakantiegeld heen?", en: "Where does holiday money go?" },
     text: {

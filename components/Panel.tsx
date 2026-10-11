@@ -133,6 +133,7 @@ function FilterNotes({ ctx }: { ctx: Ctx }) {
   if (opts.ultimate) notes.push(t.noteUltimate);
   if (opts.category === "defensie") notes.push(t.noteDefense);
   if (opts.category === "it" || opts.category === "ie") notes.push(t.noteIntraGroup);
+  if (opts.category === "winst") notes.push(t.noteWinst);
   if (!notes.length) return null;
   return (
     <ul className="filter-notes">
@@ -389,6 +390,16 @@ const SHOW = 15;
 /** Vergelijking met het officiële saldo uit de nationale rekeningen (alleen zinvol zonder filters). */
 function CrossCheck({ ctx }: { ctx: Ctx }) {
   const { opts, data, t } = ctx;
+  const world = data.meta.investmentWorld?.[opts.year];
+  if (opts.category === "winst" && world && (opts.sector === "alles" || opts.sector === "bedrijven")) {
+    const shown = totals([...ctx.resolved.values()].flat());
+    return (
+      <div className="check">
+        <strong>{t.checkTitle}</strong>
+        <p>{t.checkWinst(opts.year, ctx.fmt(world.out), ctx.fmt(world.in), ctx.fmt(Math.max(0, world.out - shown.uit)), ctx.fmt(Math.max(0, world.in - shown.in)))}</p>
+      </div>
+    );
+  }
   const na = data.meta.nationalAccounts?.[opts.year];
   if (!na || opts.sector !== "alles" || opts.category !== "alles" || !opts.reexport) return null;
   return (

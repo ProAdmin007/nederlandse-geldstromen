@@ -23,7 +23,7 @@ export interface ViewState {
 }
 
 const SECTORS: SectorFilter[] = ["alles", "overheid", "bedrijven", "consumenten"];
-const CATS: CategoryFilter[] = ["alles", "it", "energie", "goederen", "diensten", "defensie", "ie", "hulp", "eu", "uitkeringen", "overmakingen"];
+const CATS: CategoryFilter[] = ["alles", "it", "energie", "goederen", "diensten", "defensie", "ie", "hulp", "eu", "uitkeringen", "overmakingen", "winst"];
 const UNITS: Unit[] = ["eur", "pp", "bbp"];
 
 /** Leest de stand uit de URL, zodat een gedeelde link precies hetzelfde beeld geeft. */

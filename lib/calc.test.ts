@@ -206,7 +206,7 @@ describe("echte data", () => {
     const s = cbsRow(cbsServices, name, (r) => r.Perioden === "2024JJ00" && r.Diensten === "T001039");
     // Overdrachten (hulp, EU, uitkeringen, overmakingen) komen er los bij; wat van het CBS-cijfer is
     // afgetrokken (zoals gerealiseerde defensie-aankopen) telt wel mee, zodat het totaal gelijk blijft.
-    const TRANSFERS = ["hulp", "eu", "uitkeringen", "overmakingen"];
+    const TRANSFERS = ["hulp", "eu", "uitkeringen", "overmakingen", "winst"];
     const flows = resolveAll(real, opts({ estimates: false })).get(id)!.filter((f) => !TRANSFERS.includes(f.category));
     const t = totals(flows);
     // Afronding per regel op hele miljoenen: kleine afwijking toegestaan.
@@ -214,10 +214,12 @@ describe("echte data", () => {
     expect(t.in).toBeCloseTo((g.TotaleUitvoerwaarde_2 as number) + (s.UitvoerVanDiensten_2 as number), -1);
   });
 
-  it("schattingen veranderen het totaal niet (ze worden van het CBS-cijfer afgetrokken)", () => {
+  it("schattingen binnen een officieel cijfer veranderen het totaal niet (ze worden ervan afgetrokken)", () => {
+    // Winst en rente kent ook zelfstandige schattingen (vertrouwelijk brievenbusdeel); die vallen terecht weg.
+    const notWinst = (fs: Flow[]) => fs.filter((f) => f.category !== "winst");
     for (const year of real.meta.years) {
-      const a = resolveAll(real, opts({ year, estimates: false })).get("840")!;
-      const b = resolveAll(real, opts({ year, estimates: true })).get("840")!;
+      const a = notWinst(resolveAll(real, opts({ year, estimates: false })).get("840")!);
+      const b = notWinst(resolveAll(real, opts({ year, estimates: true })).get("840")!);
       expect(totals(b).uit).toBeCloseTo(totals(a).uit, 0);
     }
   });
@@ -354,7 +356,7 @@ describe("belasting", () => {
 
 describe("controle met de nationale rekeningen", () => {
   it("het handelssaldo in de app volgt het officiële saldo in elk jaar (zelfde teken, binnen 40%)", () => {
-    const TRANSFERS = ["hulp", "eu", "uitkeringen", "overmakingen"];
+    const TRANSFERS = ["hulp", "eu", "uitkeringen", "overmakingen", "winst"];
     for (const year of real.meta.years) {
       const na = real.meta.nationalAccounts![year];
       const flows = [...resolveAll(real, opts({ year })).values()].flat().filter((f) => !TRANSFERS.includes(f.category));
@@ -365,5 +367,20 @@ describe("controle met de nationale rekeningen", () => {
       expect(t.in / na.exp, String(year)).toBeGreaterThan(0.7);
       expect(t.in / na.exp, String(year)).toBeLessThan(1.3);
     }
+  });
+});
+
+describe("winst en rente op investeringen", () => {
+  it("VS 2024: totaal minus brievenbusfirma's, zoals Eurostat publiceert", () => {
+    const flows = resolveAll(real, opts({ year: 2024, category: "winst" })).get("840")!;
+    const t = totals(flows);
+    expect(t.uit).toBeCloseTo(56053 - 12608, -1); // naar Amerikaanse eigenaren
+    expect(t.in).toBeGreaterThan(15000); // naar Nederlandse eigenaren
+    expect(flows.every((f) => f.dataType === "berekend")).toBe(true);
+  });
+
+  it("vult een vertrouwelijk brievenbusdeel aan als schatting (VS 2023)", () => {
+    const flows = resolveAll(real, opts({ year: 2023, category: "winst" })).get("840")!;
+    expect(flows.some((f) => f.dataType === "schatting")).toBe(true);
   });
 });

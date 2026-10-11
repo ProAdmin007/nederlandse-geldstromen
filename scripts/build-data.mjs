@@ -53,7 +53,7 @@ const MIN_OTHER = 25;
 
 const DIRECTIONS = ["uit", "in"];
 const SECTORS = ["overheid", "bedrijven", "consumenten"];
-const CATEGORIES = ["it", "energie", "goederen", "diensten", "defensie", "ie", "hulp", "eu", "uitkeringen", "overmakingen"];
+const CATEGORIES = ["it", "energie", "goederen", "diensten", "defensie", "ie", "hulp", "eu", "uitkeringen", "overmakingen", "winst"];
 const DATATYPES = ["officieel", "berekend", "schatting"];
 
 /** Kortere Engelse namen waar de ISO-naam onhandig lang is. */
@@ -425,6 +425,8 @@ const dataset = {
     serviceYears,
     population: pick(T.bevolking, "TotaleBevolking_1"),
     gdp: pick(T.bbp, "BrutoBinnenlandsProduct_2"),
+    /** Wereldtotalen inkomen uit directe investeringen zonder brievenbusfirma's (Eurostat), ter controle. */
+    investmentWorld: extras.find((e) => e.key === "winst")?.world ?? {},
     /** Officiële uit- en invoer van goederen en diensten (nationale rekeningen), ter controle. */
     nationalAccounts: Object.fromEntries(
       T.bbp.data
@@ -452,8 +454,8 @@ const dataset = {
       ),
       ...extras.map((e) => e.meta).filter(Boolean),
       N(
-        "Inkomens uit beleggingen (dividend, rente) zijn bewust weggelaten: die worden in Nederland sterk vertekend door brievenbusfirma's.",
-        "Investment income (dividends, interest) is deliberately left out: in the Netherlands it is heavily distorted by special purpose entities.",
+        "Inkomen uit directe investeringen staat erin zonder brievenbusfirma's (die vertekenen de Nederlandse cijfers sterk). Inkomen uit beleggingen in aandelen en obligaties zonder zeggenschap is weggelaten.",
+        "Direct investment income is included excluding special purpose entities (which heavily distort Dutch figures). Income from portfolio investment in shares and bonds without control is left out.",
       ),
       N(
         `Landen met minder dan €${MIN_TRADE / 1000} mld handel per jaar zijn weggelaten, tenzij er andere geldstromen van minstens €${MIN_OTHER} mln zijn.`,
