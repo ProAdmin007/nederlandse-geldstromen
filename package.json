@@ -10,7 +10,8 @@
     "data:build": "node scripts/build-data.mjs",
     "data": "npm run data:fetch && npm run data:build",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "data:cbcr": "node scripts/check-cbcr.mjs --apply"
   },
   "dependencies": {
     "d3-geo": "^3.1.1",

@@ -340,7 +340,8 @@ export function TaxSection({ ctx, countryId }: { ctx: Ctx; countryId?: string })
               <tbody>
                 {list.map((r, i) => {
                   const tax = r.taxPaid ?? r.taxAccrued;
-                  const rate = tax != null && r.profit ? Math.round((tax / r.profit) * 100) : null;
+                  // Alleen bij winst: bij verlies zegt een percentage niets.
+                  const rate = tax != null && r.profit != null && r.profit > 0 ? Math.round((tax / r.profit) * 100) : null;
                   return (
                     <tr key={i} className={r.country === "528" ? "is-nl" : undefined}>
                       <th scope="row">

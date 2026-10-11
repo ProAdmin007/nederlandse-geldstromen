@@ -4,14 +4,14 @@
 
 ### Hoeveel geld stroomt er vanuit Nederland naar de rest van de wereld, en hoeveel komt er terug?
 
-Een interactieve wereldkaart van handel, ontwikkelingshulp, EU-begroting, pensioenen, overmakingen
-en defensie-aankopen. Gebouwd op officiële bronnen, met bij elk bedrag de bron, het jaar en een eerlijk
+Een interactieve wereldkaart van handel, winst op investeringen, ontwikkelingshulp, EU-begroting, pensioenen,
+overmakingen en defensie-aankopen. Gebouwd op officiële bronnen, met bij elk bedrag de bron, het jaar en een eerlijk
 label: officieel, berekend of geschat.
 
 [![Licentie: MIT](https://img.shields.io/badge/licentie-MIT-green)](LICENSE)
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-37%20geslaagd-brightgreen)
+![Tests](https://img.shields.io/badge/tests-39%20geslaagd-brightgreen)
 ![Jaren](https://img.shields.io/badge/jaren-2002–2025-23423a)
 ![Landen](https://img.shields.io/badge/landen-121-23423a)
 ![Talen](https://img.shields.io/badge/talen-NL%20·%20EN-23423a)
@@ -34,6 +34,7 @@ Een paar dingen die direct uit de data komen:
 | 🇺🇸 **De VS** | In 2025 ging er **€117,4 mld** naar de VS en kwam er **€81,9 mld** terug. Zonder doorvoer via Rotterdam is dat €83,1 mld tegenover €72,3 mld. |
 | 💡 **Royalty's** | Nederland betaalde in 2024 **€21,2 mld** aan de VS voor het gebruik van intellectueel eigendom, tegen €1,5 mld terug. |
 | 🏢 **Big Tech en belasting** | Microsoft had in Nederland **$6,2 mld omzet, maar $312 mln winst** en betaalde $105 mln belasting. In Ierland boekte het $47,1 mld winst. |
+| 💰 **Winst** | Amerikaanse eigenaren verdienden in 2024 **€43,4 mld** aan hun bedrijven in Nederland; Nederlandse eigenaren verdienden €21,1 mld in de VS (zonder brievenbusfirma's). |
 | 🏝️ **Doorsluizen** | Royalty's die via Nederland naar belastingparadijzen gingen, daalden van **€32,1 mld (2019) naar €0,7 mld (2024)**. |
 | 🇷🇺 **Rusland** | Naar Rusland ging in 2021 nog €19,5 mld; in 2024 was dat €3,5 mld. |
 | 🇪🇺 **EU** | Nederland droeg in 2024 €7,5 mld af aan de EU-begroting (inclusief invoerrechten); de EU gaf €4,5 mld uit in Nederland. |
@@ -51,6 +52,7 @@ Een paar dingen die direct uit de data komen:
 - 📖 **Verhalen**: één klik naar "De energiecrisis van 2022", "Russische sancties", "Wat betalen we aan Big Tech?" en meer
 - 📅 Jaarschuif 2002–2025 met afspeelknop
 - 📊 Twee jaren vergelijken, met de groei in procenten
+- 🌊 **Stromen**: "Waar gaat elke euro heen?" als stroomdiagram van categorie naar land
 
 </td>
 <td width="50%" valign="top">
@@ -59,7 +61,8 @@ Een paar dingen die direct uit de data komen:
 - 🚢 Met of zonder wederuitvoer (doorvoer via Rotterdam)
 - 🇮🇪→🇺🇸 Factuurland of uiteindelijke ontvanger
 - 🏷️ Labels officieel / berekend / schatting, en schattingen uit te zetten
-- 🧾 **Wat blijft er in Nederland?**: omzet, winst en belasting van Big Tech per land
+- 🧾 **Wat blijft er in Nederland?**: omzet, winst en belasting van Big Tech per land, automatisch bijgewerkt
+- 💰 **Winst en rente op investeringen**: hoeveel winst naar buitenlandse eigenaren gaat en terugkomt
 - ✅ Controle met het officiële saldo uit de nationale rekeningen
 
 </td>
@@ -69,7 +72,7 @@ Een paar dingen die direct uit de data komen:
 
 **Filteren**
 - Wie betaalt: overheid, bedrijven of consumenten
-- Tien categorieën: goederen, energie, diensten, IT/cloud, intellectueel eigendom, defensie, ontwikkelingshulp, EU-begroting, uitkeringen en overmakingen
+- Elf categorieën: goederen, energie, diensten, IT/cloud, intellectueel eigendom, defensie, winst en rente, ontwikkelingshulp, EU-begroting, uitkeringen en overmakingen
 - Euro, per inwoner of % bbp
 
 </td>
@@ -77,6 +80,7 @@ Een paar dingen die direct uit de data komen:
 
 **Delen en gebruiken**
 - 🔗 Deelbare link: alle instellingen staan in de URL
+- 📣 **Delen**: elk verhaal heeft een eigen pagina met preview-afbeelding voor LinkedIn, WhatsApp en X; met één klik een afbeelding van het huidige beeld
 - 📋 Tabelweergave en CSV-download
 - 🌍 Nederlands en Engels
 - 📱 Werkt op desktop en mobiel
@@ -89,6 +93,9 @@ Een paar dingen die direct uit de data komen:
 <tr>
 <td width="50%"><img src="docs/verhaal.png" alt="Het verhaal over de energiecrisis van 2022"><br><sub>Verhaal: de energiecrisis van 2022, vergeleken met 2021</sub></td>
 <td width="50%"><img src="docs/tabel.png" alt="Tabelweergave per inwoner, vergeleken met 2019"><br><sub>Tabel per inwoner, met verandering ten opzichte van 2019</sub></td>
+</tr>
+<tr>
+<td colspan="2"><img src="docs/stromen.png" alt="Stroomdiagram: waar gaat elke euro heen?"><br><sub>Stromen: waar gaat elke euro heen? Van categorie naar land</sub></td>
 </tr>
 <tr>
 <td><img src="docs/belasting.png" alt="Omzet, winst en belasting van Microsoft en Google in Nederland en Ierland" width="100%"><br><sub>Wat blijft er in Nederland? Omzet, winst en belasting per concern</sub></td>
@@ -112,6 +119,7 @@ Open http://localhost:3000. De verwerkte data zit in de repository; je hoeft nie
 | `npm run dev` | Start de app lokaal |
 | `npm test` | Draait de 37 tests, ook tegen de ruwe bronnen |
 | `npm run data` | Haalt alle bronnen opnieuw op en bouwt de dataset |
+| `npm run data:cbcr` | Voegt nieuwe landenrapporten van techbedrijven toe |
 | `npm run build` | Maakt een statische site in `out/` |
 
 ## 🧭 Hoe het werkt
@@ -154,6 +162,7 @@ de browser uit. Daardoor werkt hij op elke webhost.
 | [Europese Commissie](https://commission.europa.eu/strategy-and-policy/eu-budget/long-term-eu-budget/2021-2027/spending-and-revenue_en) | EU-begroting: afdrachten, invoerrechten en EU-uitgaven in Nederland (2000–2025) |
 | [Europese Commissie / HIVA](https://hiva.kuleuven.be/nl/onderzoeksmap/thema/verzorgingsstaat/p/Docs/network-statistics-ry-2024/cross-border-pensions-reference-year-2024.pdf) | Wettelijke pensioenen naar en uit EU/EFTA-landen en het VK (2024) |
 | [Eurostat bop_rem6](https://ec.europa.eu/eurostat/databrowser/view/bop_rem6/default/table) | Overmakingen door migranten |
+| [Eurostat bop_fdi6_inc](https://ec.europa.eu/eurostat/databrowser/view/bop_fdi6_inc/default/table) | Winst en rente op directe investeringen, zonder brievenbusfirma's (2014–2024) |
 | F-35-rapportages en jaarverslagen Defensiematerieelbegrotingsfonds | Gerealiseerde defensie-aankopen per project (2015–2025) |
 | Kamerbrief SLM Rijk, jaarverslagen SURF, onderzoek AD/Binnenlands Bestuur | IT-uitgaven van Rijk, hoger onderwijs en gemeenten |
 
@@ -164,6 +173,7 @@ de browser uit. Daardoor werkt hij op elke webhost.
 
 | Bron | Gebruikt voor |
 |---|---|
+| [Taxplorer](https://www.taxplorer.eu/) (EU Tax Observatory, CC BY-NC-ND 4.0) | Nieuwe landenrapporten, maandelijks automatisch gecontroleerd |
 | EU-landenrapporten van [Microsoft](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/FY25-Microsoft-EU-Directive-2021-2101-Report.pdf) en [Apple](https://www.apple.com/legal/more-resources/docs/Apple-Inc-EU-pCbCR-FY25.pdf), [Taxplorer](https://www.taxplorer.eu/) | Omzet, winst en belasting per land |
 | Jaarrekeningen via NOS, Quote, Irish Times | Netflix, Google (Dutch sandwich), Google en Meta in Ierland |
 | Kamerstuk 25087 nr. 357 (DNB), CBS 84120NED, Miljoenennota 2027, Commissie Ter Haar | Royaltystromen, bronbelasting, minimumbelasting, vennootschapsbelasting |
@@ -180,8 +190,8 @@ de browser uit. Daardoor werkt hij op elke webhost.
    en de app waarschuwt bij vergelijken.
 3. **Een gat is geen nul.** Jaren die nog niet zijn gepubliceerd, zie je als gat. De app meldt ook welke
    bronnen in een jaar nog ontbreken.
-4. **Saldo is geen winst.** Een positief saldo betekent meer verkopen dan aankopen. Winst die naar buitenlandse
-   eigenaren gaat, zit er niet in; dat staat ook in de app.
+4. **Saldo is geen winst.** Een positief saldo betekent meer verkopen dan aankopen. Hoeveel winst naar buitenlandse
+   eigenaren gaat, staat in een eigen categorie, zonder brievenbusfirma's.
 5. **Gecontroleerd.** Het handelssaldo in de app volgt in elk jaar het officiële saldo uit de nationale
    rekeningen. Een test bewaakt dat, net als dat de totalen per land precies de CBS-cijfers zijn.
 
@@ -192,8 +202,9 @@ de browser uit. Daardoor werkt hij op elke webhost.
 - Maar ~15% van de ontwikkelingshulp is aan een land toe te wijzen.
 - Overmakingen in de statistiek (~€1 mld) zijn veel lager dan de schatting van de Wereldbank (USD 7,8 mld).
 - Pensioenen per land zijn er alleen voor Europa en voor 2024.
-- De landenrapporten van Google, Meta en Amazon verschijnen pas eind 2026.
-- Bewust weggelaten: dividend en rente, omdat brievenbusfirma's die cijfers sterk vertekenen.
+- De landenrapporten van Google, Meta en Amazon verschijnen pas eind 2026; ze worden dan automatisch toegevoegd.
+- Winst en rente op investeringen: niet alles is per land gepubliceerd (een deel alleen per regio of vertrouwelijk). De app toont het wereldtotaal ter controle.
+- Bewust weggelaten: inkomen uit beleggingen in aandelen en obligaties zonder zeggenschap.
 
 ## 🗂️ Projectstructuur
 
