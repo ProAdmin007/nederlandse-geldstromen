@@ -90,3 +90,21 @@ export const STORIES: Story[] = [
     needs: "overmakingen",
   },
 ];
+
+/** Querystring voor een verhaal, met dezelfde parameternamen als de app (lib/urlState.ts). */
+export function storyQuery(story: Story, lang: Lang = "nl"): string {
+  const s = story.state;
+  const q = new URLSearchParams();
+  if (s.year != null) q.set("jaar", String(s.year));
+  if (s.sector && s.sector !== "alles") q.set("sector", s.sector);
+  if (s.category && s.category !== "alles") q.set("categorie", s.category);
+  if (s.unit && s.unit !== "eur") q.set("eenheid", s.unit);
+  if (s.reexport === false) q.set("wederuitvoer", "nee");
+  if (s.estimates === false) q.set("schattingen", "nee");
+  if (s.ultimate) q.set("ontvanger", "uiteindelijk");
+  if (s.country) q.set("land", s.country);
+  if (s.compare != null) q.set("vergelijk", String(s.compare));
+  if (lang !== "nl") q.set("lang", lang);
+  q.set("verhaal", story.id);
+  return `?${q}`;
+}

@@ -10,6 +10,8 @@ import { format, resolveAll, type CategoryFilter, type Options, type SectorFilte
 import { CATEGORIES, useDataset } from "@/lib/data";
 import { CATEGORY_LABELS, SECTOR_LABELS, STRINGS, UNIT_LABELS } from "@/lib/i18n";
 import { STORIES } from "@/lib/stories";
+import { factsFor } from "@/lib/share";
+import { downloadShareImage } from "@/lib/shareImage";
 import { useUrlState, type ViewState } from "@/lib/urlState";
 import type { Lang } from "@/lib/types";
 
@@ -127,14 +129,49 @@ export default function App() {
     update({ ...fallback, lang, view: state.view, ...s.state, year: yr, story: id });
   };
 
-  const copyLink = async () => {
+  // Bij een actief verhaal delen we de verhaalpagina: die heeft een eigen titel en afbeelding voor sociale media.
+  const shareUrl = () => {
+    const base = `${window.location.origin}${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}`;
+    return story ? `${base}/verhaal/${story.id}/` : window.location.href;
+  };
+  const viewTitle = selected?.name ?? (state.category === "alles" ? t.title : CATEGORY_LABELS[lang][state.category]);
+  const share = async () => {
+    const url = shareUrl();
+    const text = story ? story.title[lang] : `${viewTitle} · ${state.year}`;
+    // Het deelmenu alleen op touchapparaten; op een computer is de link kopiëren handiger.
+    const touch = window.matchMedia?.("(pointer: coarse)").matches;
+    if (touch && typeof navigator.share === "function") {
+      try {
+        await navigator.share({ title: t.title, text, url });
+        return;
+      } catch {
+        // geannuleerd of niet toegestaan: val terug op kopiëren
+      }
+    }
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      window.prompt(t.copyPrompt, window.location.href);
+      window.prompt(t.copyPrompt, url);
     }
+  };
+  const saveImage = () => {
+    const facts = factsFor(data, opts, state.country, lang);
+    const filters = [
+      selected ? t.imageAbout(selected.name) : t.imageAboutAll,
+      state.category === "alles" ? null : CATEGORY_LABELS[lang][state.category],
+      state.sector === "alles" ? null : SECTOR_LABELS[lang][state.sector],
+      state.reexport ? null : t.withoutReexport,
+      state.ultimate ? t.ultimate : null,
+    ].filter(Boolean);
+    downloadShareImage({
+      title: story ? story.title[lang] : `${viewTitle} · ${state.year}`,
+      subtitle: story ? story.text[lang] : filters.join(" · "),
+      facts,
+      footer: `${t.imageFooter} · ${window.location.host}`,
+      filename: `${lang === "en" ? "money-flows" : "geldstromen"}-${state.country ?? state.category}-${state.year}.png`,
+    });
   };
 
   return (
@@ -296,8 +333,11 @@ export default function App() {
                 {t.flowsView}
               </button>
             </div>
-            <button className="button" onClick={copyLink}>
-              {copied ? t.copied : t.copyLink}
+            <button className="button" onClick={share}>
+              {copied ? t.copied : t.share}
+            </button>
+            <button className="button" onClick={saveImage} title={t.imageTitle}>
+              {t.image}
             </button>
             <button className="button" onClick={() => downloadCsv(data, resolved, opts, lang)}>
               {t.csv}
