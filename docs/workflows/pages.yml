@@ -1,0 +1,49 @@
+# Publiceert de site op GitHub Pages. Staat nu op handmatig: de site gaat pas live als je deze
+# workflow zelf start (Actions → "Publiceren op GitHub Pages" → Run workflow).
+# Eenmalig instellen: Settings → Pages → Source: "GitHub Actions".
+# Automatisch publiceren bij elke push: voeg hieronder weer "push: branches: [main]" toe.
+name: Publiceren op GitHub Pages
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+        env:
+          # Projectpagina's staan onder /<repo-naam>
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -234,6 +234,9 @@ Een bron gevonden die een gat vult? Graag!
 `npm run build` maakt een statische site in `out/` die werkt op GitHub Pages, Netlify of Cloudflare Pages.
 Staat de site in een submap? Zet dan `NEXT_PUBLIC_BASE_PATH=/submap` tijdens het bouwen.
 
+Kant-en-klare GitHub Actions-workflows (tests, publiceren, data bijwerken) staan in
+[`docs/workflows/`](docs/workflows/), met uitleg hoe je ze activeert.
+
 ## 🇬🇧 English
 
 **Dutch Money Flows** is an interactive map of money flowing between the Netherlands and the rest of the world,
