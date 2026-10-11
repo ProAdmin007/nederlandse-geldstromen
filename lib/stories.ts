@@ -8,7 +8,7 @@ export interface Story {
   title: Record<Lang, string>;
   text: Record<Lang, string>;
   /** Wordt over de standaardinstellingen gelegd. */
-  state: Partial<Omit<ViewState, "lang" | "story">>;
+  state: Partial<Omit<ViewState, "lang" | "story" | "view">>;
   /** Alleen tonen als er data is voor deze categorie. */
   needs?: Category;
 }

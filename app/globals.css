@@ -1063,3 +1063,48 @@ h3 {
     font-size: 1.2rem;
   }
 }
+
+/* Stroomdiagram */
+.flows {
+  padding: 8px 10px 4px;
+}
+.flows__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.flows__head h2 {
+  font-size: 1.15rem;
+}
+.flows__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 6px;
+}
+.flows__link {
+  stroke-opacity: 0.35;
+  transition: stroke-opacity 0.15s;
+}
+.flows__link:hover {
+  stroke-opacity: 0.65;
+}
+.flows__link--dim {
+  stroke-opacity: 0.06;
+}
+.flows__label {
+  font-size: 12px;
+  fill: var(--text);
+}
+.flows__value {
+  fill: var(--muted);
+  font-size: 11px;
+}
+.flows__node--click {
+  cursor: pointer;
+}
+.flows__node--click:hover .flows__label {
+  text-decoration: underline;
+}

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import WorldMap from "./WorldMap";
 import DataTable, { downloadCsv } from "./DataTable";
 import CountrySearch from "./CountrySearch";
+import FlowDiagram from "./FlowDiagram";
 import { Badge, CountryDetail, Overview, type Ctx, type Fmt } from "./Panel";
 import { format, resolveAll, type CategoryFilter, type Options, type SectorFilter, type Unit } from "@/lib/calc";
 import { CATEGORIES, useDataset } from "@/lib/data";
@@ -43,7 +44,7 @@ export default function App() {
         reexport: true,
         estimates: true,
         ultimate: false,
-        table: false,
+        view: "kaart",
         country: null,
         compare: null,
         lang: startLang,
@@ -123,7 +124,7 @@ export default function App() {
     const s = STORIES.find((x) => x.id === id)!;
     const yr = s.state.year != null ? Math.min(Math.max(s.state.year, minYear), maxYear) : fallback.year;
     setPlaying(false);
-    update({ ...fallback, lang, table: state.table, ...s.state, year: yr, story: id });
+    update({ ...fallback, lang, view: state.view, ...s.state, year: yr, story: id });
   };
 
   const copyLink = async () => {
@@ -285,11 +286,14 @@ export default function App() {
           </div>
           <div className="control-actions">
             <div className="segmented" role="group" aria-label={t.view}>
-              <button aria-pressed={!state.table} onClick={() => update({ table: false })}>
+              <button aria-pressed={state.view === "kaart"} onClick={() => update({ view: "kaart" })}>
                 {t.map}
               </button>
-              <button aria-pressed={state.table} onClick={() => update({ table: true })}>
+              <button aria-pressed={state.view === "tabel"} onClick={() => update({ view: "tabel" })}>
                 {t.table}
+              </button>
+              <button aria-pressed={state.view === "stromen"} onClick={() => update({ view: "stromen" })}>
+                {t.flowsView}
               </button>
             </div>
             <button className="button" onClick={copyLink}>
@@ -305,8 +309,10 @@ export default function App() {
       <div className="layout">
         <section className="card map-card">
           <CountrySearch countries={data.countries} onSelect={select} t={t} />
-          {state.table ? (
+          {state.view === "tabel" ? (
             <DataTable ctx={ctx} selectedId={state.country} onSelect={select} />
+          ) : state.view === "stromen" ? (
+            <FlowDiagram ctx={ctx} onSelect={select} />
           ) : (
             <>
               <WorldMap data={data} resolved={resolved} fmt={fmt} compare={compare} t={t} lang={lang} selectedId={state.country} onSelect={select} />

@@ -12,7 +12,8 @@ export interface ViewState {
   reexport: boolean;
   estimates: boolean;
   ultimate: boolean;
-  table: boolean;
+  /** Hoofdweergave: kaart, tabel of stroomdiagram. */
+  view: "kaart" | "tabel" | "stromen";
   country: string | null;
   /** Vergelijkingsjaar, of null. */
   compare: number | null;
@@ -38,7 +39,7 @@ export function parse(search: string, fallback: ViewState, years: number[]): Vie
     reexport: q.get("wederuitvoer") !== "nee",
     estimates: q.get("schattingen") !== "nee",
     ultimate: q.get("ontvanger") === "uiteindelijk",
-    table: q.get("weergave") === "tabel",
+    view: q.get("weergave") === "tabel" ? "tabel" : q.get("weergave") === "stromen" ? "stromen" : "kaart",
     country: q.get("land") || null,
     compare: years.includes(Number(q.get("vergelijk"))) ? Number(q.get("vergelijk")) : null,
     lang: q.get("lang") === "en" ? "en" : q.get("lang") === "nl" ? "nl" : fallback.lang,
@@ -56,7 +57,7 @@ export function serialize(s: ViewState, fallback: ViewState): string {
   if (!s.reexport) q.set("wederuitvoer", "nee");
   if (!s.estimates) q.set("schattingen", "nee");
   if (s.ultimate) q.set("ontvanger", "uiteindelijk");
-  if (s.table) q.set("weergave", "tabel");
+  if (s.view !== "kaart") q.set("weergave", s.view);
   if (s.country) q.set("land", s.country);
   if (s.compare != null) q.set("vergelijk", String(s.compare));
   if (s.lang !== "nl") q.set("lang", s.lang);
