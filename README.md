@@ -250,3 +250,13 @@ official, calculated or an estimate. Use the button at the top right or add `?la
 Code: [MIT](LICENSE). Cijfers: © CBS (StatLine, [CC BY 4.0](https://www.cbs.nl/nl-nl/over-ons/website/copyright)),
 OESO, Eurostat, Europese Commissie, ECB en de andere genoemde bronnen, volgens hun eigen voorwaarden.
 Kaart: [world-atlas](https://github.com/topojson/world-atlas) (Natural Earth).
+
+---
+
+<div align="center">
+
+## ☕ Support
+
+<a href="https://ko-fi.com/proadmin007" target="_blank"><img height="48" src="https://storage.ko-fi.com/cdn/kofi2.png?v=6" alt="Buy Me a Coffee at ko-fi.com" /></a>
+
+</div>
